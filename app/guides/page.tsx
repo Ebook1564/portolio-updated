@@ -112,7 +112,7 @@ export default function GuidesPage() {
                             Deep technical blueprints and engineering strategies specifically designed for high-performance HTML5 game development.
                         </motion.p>
 
-                        <motion.div
+                        {/* <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
@@ -129,7 +129,7 @@ export default function GuidesPage() {
                             <button className="w-full sm:w-auto px-10 py-5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-[2rem] font-black uppercase tracking-[0.1em] text-sm transition-all shadow-xl shadow-indigo-600/30 flex items-center justify-center gap-2 group">
                                 <BookOpen className="w-5 h-5 group-hover:rotate-12 transition-transform" /> Quick Start
                             </button>
-                        </motion.div>
+                        </motion.div> */}
                     </div>
 
                     {/* Simple Geometric Accents */}
