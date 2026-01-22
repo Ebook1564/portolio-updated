@@ -101,7 +101,7 @@ export default function Home() {
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-40 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
-                  <Link href="/enquire">
+                  <Link href="/blog">
                     <Button size="lg" className="relative bg-white text-blue-600 hover:bg-blue-50 text-xl px-12 py-8 rounded-full shadow-2xl overflow-hidden font-black group/btn flex items-center gap-3">
                       <motion.div
                         animate={{ x: ['100%', '-100%'] }}
@@ -515,7 +515,7 @@ export default function Home() {
                       {/* Pulse Effect Background */}
                       <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
 
-                      <Link href="/enquire">
+                      <Link href="/blog">
                         <Button size="lg" className="relative bg-white text-blue-600 hover:bg-blue-50 text-xl px-12 py-8 rounded-full shadow-2xl flex items-center gap-3 overflow-hidden">
                           {/* Shimmer Effect */}
                           <motion.div

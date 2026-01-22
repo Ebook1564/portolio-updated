@@ -196,7 +196,7 @@ export default function BlogPage() {
         </section>
 
         {/* Newsletter / CTA Section */}
-        <section className="py-24 relative overflow-hidden bg-slate-50">
+        {/* <section className="py-24 relative overflow-hidden bg-slate-50">
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -229,7 +229,7 @@ export default function BlogPage() {
               </div>
             </motion.div>
           </div>
-        </section>
+        </section> */}
       </main>
       <Footer />
     </div>
