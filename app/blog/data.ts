@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
         title: "How to Dynamically Scale Background Components in Unity 2D",
         excerpt: "Automatically scale UI, backgrounds, and sprites to match any orthographic camera viewport. Four modes (PreserveAspect, Fill, Stretch, Fit) handle all screen ratios perfectly for 2D games and prototypes.",
         content: `
-# ScaleToCamera Script Tutorial
+
 
 Unity developers often need UI elements, backgrounds, or sprites to automatically scale with orthographic cameras across different screen sizes. This ScaleToCamera script solves that by dynamically adjusting any object's scale to match the camera's viewport using four flexible modes.
 
@@ -29,10 +29,6 @@ Attach this script to any GameObject with a Renderer component (like a SpriteRen
 - Orthographic camera assigned to the targetCamera field
 - Renderer on a child object (script measures its bounds)
 - Choose from PreserveAspect, Fill, Stretch, or Fit modes via the Inspector
-
-## How It Works
-
-The script runs in LateUpdate() to ensure camera transforms are finalized. It temporarily resets the object's scale to measure its "natural" size, then computes scale factors:
 
 \`\`\`
 worldHeight = orthographicSize * 2
@@ -57,7 +53,7 @@ scaleY = worldHeight / objectHeight
 
 Test by changing Game view aspect ratios (16:9 → 4:3).
 
-## Usage Scenarios
+**Usage Scenarios**
 
 Perfect for 2D games, prototypes, and responsive UI:
 
@@ -67,21 +63,7 @@ Perfect for 2D games, prototypes, and responsive UI:
 - **Safe Layouts**: Fit prevents clipping on ultrawide monitors with automatic black bars
 - **Prototyping**: Scale placeholder art to any camera size during development
 
-Combine with Unity's Canvas Scaler for hybrid 2D/UI projects.
 
-## Customization Tips
-
-- **Z-Scale**: Locked at 1f—modify for 3D billboards
-- **Performance**: Cache Renderer reference (runs every frame in LateUpdate)
-- **Multi-Camera**: Duplicate script per camera or add camera switching
-- **Animation-Friendly**: Works with Animator since it overrides localScale
-
-**Smooth scaling extension:**
-\`\`\`csharp
-transform.localScale = Vector3.Lerp(transform.localScale, finalScale, Time.deltaTime * speed);
-\`\`\`
-
-Drop this into your Unity project and iterate!
     `,
         date: "March 15, 2024",
         category: "Gaming Trends",

@@ -189,7 +189,7 @@ export default function GuidesPage() {
                                                         </div>
                                                         <div>
                                                             <span className="block text-[10px] font-black uppercase tracking-widest text-indigo-600/60 mb-1">
-                                                                GameDev Core
+                                                                Guides
                                                             </span>
                                                             <span className="block text-xs font-bold text-slate-400">
                                                                 #{guide.category.toUpperCase()}

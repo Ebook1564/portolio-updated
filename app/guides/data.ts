@@ -10,6 +10,7 @@ export type GuideContentBlock =
     | { type: 'table'; headers: string[]; rows: string[][] }
     | { type: 'quote'; text: string; author?: string }
     | { type: 'grid'; items: { title: string; list: string[]; variant: 'good' | 'bad' }[] } // For Do's and Don'ts
+    | { type: 'image'; src: string; alt: string; caption?: string; width?: 'full' | 'half' }
 
 export interface GuideData {
     id: number;
@@ -23,261 +24,193 @@ export interface GuideData {
     icon: any;
     stats: string;
     content: GuideContentBlock[];
+    // image: string;
 }
 
 export const gameDevGuides: GuideData[] = [
     {
         id: 1,
-        title: "Optimizing 2D Physics for HTML5 Performance",
-        excerpt: "Learn how to manage collision detection and rigid body dynamics efficiently in mobile browsers using Matter.js and custom solvers.",
-        category: "Performance",
-        date: "Dec 10, 2025",
+        title: "Mouse Without Borders: Software KVM for Windows Multi-PC Workflows",
+        excerpt: 'Control up to 4 Windows PCs with one keyboard/mouse. Share files, clipboards, and cursor seamlessly without hardware KVMs',
+        category: "Productivity",
+        date: "Jan 24, 2026",
         author: "Prashant Saxena",
-        readTime: "12 min",
-        difficulty: "Advanced",
-        icon: Cpu,
-        stats: "98% Efficiency",
-        content: [
-            { type: 'header', level: 2, text: "The Single-Threaded Bottleneck" },
-            { type: 'paragraph', text: "JavaScript operates on a single thread. This means your game logic, rendering, networking, and physics simulation all fight for the same 16.6ms window (for 60fps). Physics engines like Matter.js or Box2D are CPU-intensive, often consuming 40-50% of your frame budget if left optimization-free." },
-            { type: 'alert', variant: 'warning', title: "Key Takeaway", text: "If your physics step takes more than 8ms, you will drop frames on mobile devices." },
-
-            { type: 'header', level: 3, text: "1. Broad-Phase vs. Narrow-Phase" },
-            { type: 'paragraph', text: "The naive approach to collision detection involves checking every object against every other object (O(n²)). This is fatal for performance. Instead, we use Spatial Partitioning." },
-            {
-                type: 'table',
-                headers: ["Algorithm", "Best Use Case", "Pros", "Cons"],
-                rows: [
-                    ["Quadtree", "Sparse Open Worlds", "Adapts to density", "Expensive to rebuild"],
-                    ["Spatial Hash (Grid)", "Dense Arcade Games", "O(1) Access Time", "High memory usage"]
-                ]
-            },
-
-            { type: 'header', level: 3, text: "2. Object Pooling for Rigid Bodies" },
-            { type: 'paragraph', text: "Garbage collection (GC) pauses are the enemy of smooth gameplay. Creating and destroying physics bodies every frame (e.g., bullets, particles) generates massive garbage." },
-            { type: 'alert', variant: 'tip', title: "Pro Tip", text: "Never use `new Vector2()` inside your update loop. Reuse a global temporary vector or pool your vectors to avoid GC spikes." },
-
-            { type: 'header', level: 3, text: "3. Sub-stepping for Stability" },
-            { type: 'paragraph', text: "Never rely on `requestAnimationFrame` delta time directly for physics integration. Fluctuating frame rates will cause your simulation to explode or fast-moving objects to tunnel through walls." },
-            {
-                type: 'code', language: 'javascript', filename: 'GameLoop.js', code: `// Robust Fixed Timestep Loop
-const timeStep = 1 / 60;
-let accumulator = 0;
-
-function loop(deltaTime) {
-    // Cap lag to avoid "spiral of death"
-    if (deltaTime > 0.25) deltaTime = 0.25;
-    
-    accumulator += deltaTime;
-    while (accumulator >= timeStep) {
-        physicsWorld.step(timeStep); // Always step by fixed amount
-        accumulator -= timeStep;
-    }
-    
-    // Interpolate render state for buttery smooth visuals
-    const alpha = accumulator / timeStep;
-    render(alpha);
-}`
-            },
-
-            { type: 'header', level: 3, text: "4. Constraint Relaxation" },
-            { type: 'paragraph', text: "Physics engines solve constraints (joints, contacts) iteratively. Reducing the iteration count increases performance linearly but reduces stability (stacks of boxes might wobble). On mobile, you can often reduce `positionIterations` from 10 to 4 with acceptable visual results." }
-        ]
-    },
-    {
-        id: 2,
-        title: "Advanced Shader Techniques in WebGL",
-        excerpt: "A deep dive into GLSL shaders for creating realistic water, lighting effects, and particle systems that run smoothly on every device.",
-        category: "Graphics",
-        date: "Dec 05, 2025",
-        author: "Aman Saxena",
-        readTime: "15 min",
-        difficulty: "Expert",
-        icon: Sparkles,
-        stats: "Expert Pick",
-        content: [
-            { type: 'header', level: 2, text: "The Power of the GPU" },
-            { type: 'paragraph', text: "WebGL unlocks the parallel processing power of the GPU. Writing custom GLSL (OpenGL Shading Language) allows you to perform calculations for millions of pixels simultaneously." },
-
-            { type: 'header', level: 3, text: "1. The Vertex Shader: Geometry Manipulation" },
-            { type: 'paragraph', text: "The vertex shader runs once per vertex. It's perfect for low-cost animations like waving flags, water ripples, or tree wind effects." },
-            {
-                type: 'code', language: 'glsl', filename: 'waterVertex.glsl', code: `// Simple Water Wave Vertex Shader
-uniform float uTime;
-varying vec2 vUv;
-
-void main() {
-    vUv = uv;
-    vec3 pos = position;
-    
-    // Sine wave displacement based on X position and Time
-    pos.y += sin(pos.x * 5.0 + uTime) * 0.5;
-    
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-}`
-            },
-
-            { type: 'header', level: 3, text: "2. The Fragment Shader: Pixel Artistry" },
-            { type: 'paragraph', text: "The fragment shader determines the color of every pixel. Complex lighting, reflections, and procedural textures happen here." },
-
-            { type: 'header', level: 3, text: "Raymarching & Signed Distance Fields (SDF)" }, // Note: Reduced level in content visually if needed, but keeping semantic structure
-            { type: 'paragraph', text: "Raymarching allows you to render infinite 3D worlds on a single 2D quad without any polygon geometry. It works by 'marching' a ray from the camera until it hits an SDF surface." },
-
-            { type: 'header', level: 3, text: "3. Optimizing High-Performance Shaders" },
-            {
-                type: 'grid', items: [
-                    { variant: 'good', title: "DO", list: ["Use `lowp` and `mediump` tags", "Bake lighting into textures", "Use mathematical approximations (mix, step)"] },
-                    { variant: 'bad', title: "AVOID", list: ["Complex if/else logic", "Dependent texture reads", "Discarding fragments (breaks Early-Z)"] }
-                ]
-            }
-        ]
-    },
-    {
-        id: 3,
-        title: "Building Scalable Game States for Multiplayer",
-        excerpt: "Architecture patterns for handling complex delta compression and client-side prediction in real-time competitive HTML5 games.",
-        category: "Architecture",
-        date: "Nov 28, 2025",
-        author: "Prashant Saxena",
-        readTime: "20 min",
-        difficulty: "Expert",
-        icon: Layers,
-        stats: "High Complexity",
-        content: [
-            { type: 'header', level: 2, text: "The Latency Challenge" },
-            { type: 'paragraph', text: "In a perfect world, all players would see the exact same game state instantly. In reality, light speed is limited, and networks are jittery. A robust multiplayer architecture essentially 'fakes' real-time." },
-
-            { type: 'header', level: 3, text: "1. Client-Side Prediction (CSP)" },
-            { type: 'paragraph', text: "When a player presses 'Right', they must move immediately on their screen. You cannot wait 100ms for the server to say 'OK'." },
-
-            { type: 'quote', text: "The Reconciliation Loop: Client applies input -> Sends to Server -> Server responds with Truth -> Client re-simulates if mismatch." },
-
-            {
-                type: 'list', style: 'ordered', items: [
-                    "Client applies input (Input 402) and moves player locally.",
-                    "Client sends Input 402 to Server.",
-                    "Server processes Input 402 and sends back 'True Position'.",
-                    "Client receives Server Update. If mismatch, snap to True Position and re-simulate inputs 403-405."
-                ]
-            },
-
-            { type: 'header', level: 3, text: "2. Delta Compression & Bit-Packing" },
-            { type: 'paragraph', text: "JSON is expensive. '{\"x\": 120, \"y\": 40}' is ~20 bytes. A binary buffer of two floats is 8 bytes." },
-            {
-                type: 'code', language: 'typescript', filename: 'Schema.ts', code: `// Example Schema for Schema-Based Bitpacking (e.g. Colyseus)
-import { Schema, type } from "@colyseus/schema";
-
-class Player extends Schema {
-    @type("float32") x: number = 0;
-    @type("float32") y: number = 0;
-    @type("uint8") ammo: number = 255;
-    @type("string") name: string = "Guest";
-}`
-            },
-            { type: 'paragraph', text: "This schema ensures that only the minimal changed bytes are sent over the wire, reducing bandwidth by up to 80% compared to raw JSON patches." }
-        ]
-    },
-    {
-        id: 4,
-        title: "Asset Pipeline Optimization for Mobile Web",
-        excerpt: "Everything you need to know about texture atlas generation, audio compression, and lazy loading strategies for ultra-fast load times.",
-        category: "Optimization",
-        date: "Nov 20, 2025",
-        author: "Engineering Lead",
-        readTime: "8 min",
-        difficulty: "Intermediate",
-        icon: Zap,
-        stats: "Top Rated",
-        content: [
-            { type: 'header', level: 2, text: "The 3-Second Retention Rule" },
-            { type: 'paragraph', text: "40% of users abandon a website that takes more than 3 seconds to load. For web games, this initial load time is critical." },
-
-            { type: 'header', level: 3, text: "1. Texture Atlases" },
-            { type: 'paragraph', text: "Every image requires a separate HTTP request and a GPU context switch. Pack all your small images into one giant 2048x2048 PNG. Render sprites by changing UVs." },
-
-            { type: 'header', level: 3, text: "2. Basis Universal (.basis)" },
-            { type: 'paragraph', text: "Traditional PNGs must be decompressed to raw RGBA in VRAM. Basis Universal format stays compressed in VRAM, using 6-8x less memory." },
-
-            { type: 'header', level: 3, text: "3. Audio Strategy" },
-            {
-                type: 'table',
-                headers: ["Audio Type", "Format", "Strategy"],
-                rows: [
-                    ["BGM (Music)", "AAC / MP3", "Stream (HTML5 Audio)"],
-                    ["SFX (Short)", "WebM / WAV", "Preload (Web Audio API)"]
-                ]
-            }
-        ]
-    },
-    {
-        id: 5,
-        title: "Modular Game Engine Design Patterns",
-        excerpt: "Exploring the Entity-Component-System (ECS) pattern for building flexible and maintainable game logic in modern JavaScript/TypeScript.",
-        category: "Logic",
-        date: "Nov 15, 2025",
-        author: "Prashant Saxena",
-        readTime: "10 min",
-        difficulty: "Intermediate",
-        icon: Code2,
-        stats: "Essential",
-        content: [
-            { type: 'header', level: 2, text: "Inheritance Hell vs. Composition" },
-            { type: 'paragraph', text: "In traditional OOP, you might have `class Orc extends Enemy`. But what about a `Turret` that is an enemy but can't move? The Diamond Problem arises." },
-
-            { type: 'header', level: 3, text: "The ECS Paradigm" },
-            { type: 'paragraph', text: "Entity Component System (ECS) decouples data from behavior entirely." },
-            {
-                type: 'list', style: 'unordered', items: [
-                    "Entities: Just an ID (e.g. 420).",
-                    "Components: Pure data containers (Velocity, Health).",
-                    "Systems: Pure logic iterating over entities (MovementSystem)."
-                ]
-            },
-
-            { type: 'header', level: 3, text: "Archetypes & Memory" },
-            { type: 'paragraph', text: "Advanced ECS implementations store component data in flat Float32Arrays (Structure of Arrays). This is incredibly cache-friendly for CPU pre-fetching." }
-        ]
-    },
-    {
-        id: 6,
-        title: "Designing Intuitive Mobile Touch Controls",
-        excerpt: "Best practices for gesture recognition, virtual joysticks, and haptic feedback to ensure your game feels native on all devices.",
-        category: "UI/UX",
-        date: "Nov 05, 2025",
-        author: "Aman Saxena",
-        readTime: "7 min",
+        readTime: "4 min",
         difficulty: "Beginner",
         icon: Gamepad2,
-        stats: "Highly Readable",
+        stats: "4x Productivity",
+        //   image: "/images/mouse-without-borders-hero.jpg",
         content: [
-            { type: 'header', level: 2, text: "The Touch Screen Dilemma" },
-            { type: 'paragraph', text: "Touch screens lack buttons. Designing for touch requires a 'Mobile-First' mindset." },
-
-            { type: 'header', level: 3, text: "1. The Floating Joystick" },
-            { type: 'paragraph', text: "Players never tap exactly on a static joystick. Use a Floating Joystick that re-centers itself wherever the player touches." },
-
-            { type: 'header', level: 3, text: "2. Gestures > Buttons" },
-            {
-                type: 'list', style: 'unordered', items: [
-                    "Swipe Up: Jump",
-                    "Double Tap: Dash",
-                    "Two-Finger Tap: Pause"
-                ]
-            },
-
-            { type: 'header', level: 3, text: "3. Juice it with Haptics" },
-            {
-                type: 'code', language: 'javascript', filename: 'Haptics.js', code: `// The "Impact" Function
-function triggerHaptic(intensity) {
-    if (!navigator.vibrate) return;
+            { type: 'header', level: 2, text: "Overview" },
+            
+            { type: 'paragraph', text: "Mouse Without Borders from Microsoft PowerToys provides a seamless software-based KVM alternative for managing multiple desktop setups, allowing you to control up to four Windows PCs with a single keyboard and mouse while sharing clipboards and files effortlessly. This tool eliminates the need for dedicated hardware by enabling intuitive cursor movement across screens, fostering maximum productivity and immersion in multi-machine workflows." },
+            
+            { type: 'quote', text: "The closest you'll get to telepathy between Windows machines.", author: "Tech reviewer" },
+            { type: 'alert', variant: 'tip', title: "Key Requirement", text: "Since the utility acts as a network-based KVM as opposed to a traditional hardware one, the target machines are required to be on the same local network within the same subnet." },
+            
+            { type: 'header', level: 2, text: "Setting up Mouse Without Borders on your devices" },
+            
+            { type: 'list', style: 'ordered', items: [
+                "Install PowerToys via [GitHub](https://github.com/microsoft/PowerToys/releases) or [Microsoft Store](https://www.microsoft.com/store/productId/9N8M4H02LCRM)",
+                "On your Primary Machine, open PowerToys. In the utilities section, navigate to Mouse Without Borders and enable it. In the Activation section at the top, you'll see a Security Key followed by your machine's hostname. Take note of both of these values.",
+                "On you Secondary device(s), navigate to Mouse without Borders and click inside Security Key textbox. This will expand the TextBox and allow you to input the Security Key from and the name of the Primary Machine.",
+                "In the device layout section, you can drag the on-screen PC icons to match your physical monitor layout"
+            ]},
+            
+            { type: 'alert', variant: 'warning', title: "Windows 10 Compatibility", text: "PowerToys v0.86 is the last supported version of PowerToys that ships with full functionality. You may find it [here](https://github.com/microsoft/PowerToys/releases/tag/v0.86.0)" },
+            
+            { type: 'header', level: 2, text: "Making the most of Mouse Without Borders" },
+            { type: 'header', level: 3, text: "Immersive Service Mode" },
+            
+            { type: 'paragraph', text: "Running Mouse Without Borders as a system service allows it to interact with events that require elevated user privilleges, such as Lock Screens, UAC Prompts and elevated apps running across all machines. To enable this, run PowerToys as administrator and enable 'Use Service' to install Mouse Without Borders as a system service." },
+            
+            { type: 'grid', items: [
+                {
+                    title: "✅ Service Mode Benefits",
+                    list: ["Controls lock screens", "Handles UAC prompts", "Manages elevated apps", "Zero interruptions"],
+                    variant: 'good'
+                },
+                {
+                    title: "⚠️ Security Caution",
+                    list: ["Requires admin privileges", "Avoid shared networks", "Monitor firewall rules"],
+                    variant: 'bad'
+                }
+            ]},
+            
+            { type: 'header', level: 3, text: "Master Hotkey Shortcuts" },
+            { type: 'paragraph', text: "The following are default shortcuts utilized for various use cases by Mouse Without Borders. These can be easily modified as per the user's preferemce in the Mouse without Borders setting page." },
+            
+            { type: 'table', headers: ["Hotkey", "Action", "Use Case"], rows: [
+                ["Ctrl+Alt+A", "Toggle Easy Mouse Mode", "Toggle as per your convenience whether the mouse can seamlessly fly in and out of display areas"],
+                ["Ctrl+Alt+1-4", "Jump to specific PC", "Helpful for quickly navigating multiple machine setups without hassles."],
+      ["Ctrl+Alt+L (double-tap)", "Lock all machines", "Quickly lock all machines at once"],
+      ["Ctrl+Alt+R", "Quick reconnect", "Refresh connection to devices conveniently"],
+      ["Ctrl+Alt+M", "Multi-machine input", "Broadcast mouse/keyboard input to multiple devices at once"]
+    ]},
     
-    switch(intensity) {
-        case 'light': navigator.vibrate(5); break;
-        case 'medium': navigator.vibrate(15); break;
-        case 'heavy': navigator.vibrate([30, 50, 30]); break;
-    }
-}`
-            }
-        ]
-    }
+    { type: 'header', level: 3, text: "Optimization for varying Use Cases" },
+    
+    { type: 'list', style: 'unordered', items: [
+      '"Wrap Mouse" creates continuous cursor loop (last PC → first PC), allowing you to swap between machines without lateral hierarchy',
+      '"Hide Mouse at Edge" + "Block Input at Corners" toggles minimize chances of accidental cursor movement between devices on the borders',
+      '"Move Mouse Relatively" handles DPI and resolution scaling differences between machines',
+    ]},
+    
+    { type: 'header', level: 2, text: "Troubleshooting" },
+    
+    { type: 'grid', items: [
+      {
+        title: "🔧 Connection Fixes",
+        list: ["Verify same subnet", "Add Firewall Rule for Mouse Without Borders", "Ping hostnames manually", "Refresh by hitting the Refresh button within Device Layout section", "Restart service"],
+        variant: 'good'
+      }
+    ]} 
+  ]
+}
+,
+    {
+       id: 2,
+  title: "QTTabBar: Native Windows 10 File Explorer Tabs",
+  excerpt: "Transform Windows File Explorer into a tabbed powerhouse with QTTabBar. Organize folders, drag-drop between tabs, and reclaim productivity lost to Alt+Tab folder switching.",
+  category: "Productivity",
+  date: "Jan 24, 2026",
+  author: "Prashant Saxena",
+  readTime: "5 min",
+  difficulty: "Intermediate",
+  icon: Layers,
+  stats: "10x Folder Navigation",
+//   image: "/images/qttabbar-hero.jpg",
+  content: [
+    { type: 'header', level: 2, text: "Windows Explorer Tabs Done Right" },
+    
+    { type: 'paragraph', text: "QTTabBar transforms Windows 10 File Explorer into a modern tabbed interface, eliminating endless Alt+Tab folder switching. Native integration means tabs persist across Explorer restarts, support drag-drop between tabs, and maintain full Windows Search functionality." },
+    
+    { type: 'alert', variant: 'tip', title: "Perfect Windows 10 Companion", text: "Unlike browser-style tabs, QTTabBar tabs are persistent and survive Explorer crashes/restarts. Works flawlessly with OneDrive, network drives, and Windows Search." },
+    
+    { type: 'quote', text: "The tabbed interface Windows should have shipped with, for years now.", author: "Power user" },
+    
+    { type: 'header', level: 2, text: "Lightning-Fast Installation" },
+    
+    { type: 'list', style: 'ordered', items: [
+      "Download QTTabBar from [official GitHub](https://github.com/indiff/qttabbar) (v1043 is latest stable)",
+      "Extract ZIP → Run QTTabBar.exe as Administrator (one-time setup)",
+      "Accept UAC → Check 'Register QTTabBar shell extension' → Finish",
+      "Restart Explorer.exe (Task Manager → End task → File → Run new task → explorer.exe)"
+    ]},
+    
+    { type: 'alert', variant: 'warning', title: "Windows 10 Specific", text: "Windows 11 users should use QTTabBar v1043+ with compatibility mode. Native tabs exist but lack QTTabBar's advanced features like tab reordering and folder favorites." },
+    
+    { type: 'header', level: 2, text: "Power User Configuration" },
+    { type: 'header', level: 3, text: "Essential First-Time Settings" },
+    
+    { type: 'list', style: 'unordered', items: [
+      "Right-click Explorer toolbar → QTTabBar Settings → Enable 'Show tabs'",
+      "Tabs → 'Always show tabs' + 'Close button on tabs'",
+      "Address Bar → Enable 'Drop target address bar' for drag-drop URLs",
+      "Explorer → 'Single click to open folders' + 'Tree view auto-expand'"
+    ]},
+    
+    { type: 'header', level: 3, text: "Keyboard Shortcutss" },
+    
+    { type: 'table', headers: ["Hotkey", "Action", "Power Move"], rows: [
+      ["Ctrl+T", "New Tab", "Instant folder access"],
+      ["Ctrl+Shift+T", "Reopen Closed Tab", "Never lose your place"],
+      ["Ctrl+Tab / Ctrl+Shift+Tab", "Next/Previous Tab", "Lightning navigation"],
+      ["Ctrl+W / Ctrl+F4", "Close Tab", "Clean workspace"],
+      ["Middle Click on Folder", "Open in New Tab", "One-handed workflow"],
+      ["Ctrl+MouseWheel", "Tab Zoom", "Perfect folder overview"]
+    ]},
+    
+    { type: 'header', level: 3, text: "Layout Features" },
+    
+    { type: 'grid', items: [
+      {
+        title: "✅ Tab Management",
+        list: ["Reorder tabs by drag", "Pin frequently used folders", "Color-code tabs", "Group tabs by project"],
+        variant: 'good'
+      },
+      {
+        title: "⚡ Explorer Integration",
+        list: ["Drag-drop between tabs", "Native search works", "OneDrive sync compatible", "Network drives supported"],
+        variant: 'good'
+      }
+    ]},
+    
+    { type: 'header', level: 2, text: "Advanced Workflow Hacks" },
+    
+    // { type: 'list', style: 'unordered', items: [
+    //   '"Tree View Tabs - See folder hierarchy without expanding (View → Tree)",
+    //   '"Drop Zone Indicators - Visual feedback when dragging between tabs (Settings → Drop)"',
+    //   '"Quick Access Tabs" - Pin Desktop, Documents, Downloads permanently (right-click tab → Pin)"',
+    //   '"Duplicate Tab" (Ctrl+K) - Compare folders side-by-side instantly',
+    //   '"Address Bar Dropdown" - Recent folders + typed paths in one click'
+    // ]},
+    
+    { type: 'header', level: 2, text: "Troubleshooting Common Issues" },
+    
+    { type: 'grid', items: [
+      {
+        title: "🔧 Shell Extension Fixes",
+        list: ["Run QTTabBar.exe as Admin → 'Repair Registration'", "Restart Explorer.exe after settings changes", "Disable antivirus real-time scanning during setup"],
+        variant: 'good'
+      },
+      {
+        title: "🐛 Tab Disappearing",
+        list: ["Explorer → Folder Options → 'Restore previous folder windows'", "Re-run QTTabBar setup as Administrator", "Check 'Persistent tabs' in QTTabBar Settings"],
+        variant: 'good'
+      }
+    ]},
+    
+    { type: 'alert', variant: 'tip', title: "Windows 10 Optimization", text: "Disable Windows animations (System → Advanced → Performance Settings → Adjust for best performance) for maximum QTTabBar responsiveness with large folder trees." },
+    
+    { type: 'header', level: 3, text: "Performance Tweaks" },
+    
+    { type: 'list', style: 'unordered', items: [
+      "Settings → General → 'Limit tab history' to 50 (prevents memory bloat)",
+      "Disable thumbnail previews for network drives (saves 200-500ms)",
+      "Enable 'Reuse tabs for same folder' to prevent tab explosion"
+    ]},
+
+  ]
+}
 ]
