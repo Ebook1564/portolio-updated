@@ -8,6 +8,9 @@ import { motion, useScroll, useSpring } from "framer-motion"
 import { Calendar, Clock, ArrowLeft, Share2, Bookmark, Heart, Twitter, Linkedin, Facebook, Copy, Check, MessageSquare } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 
 export default function BlogPostPage() {
     const params = useParams()
@@ -241,12 +244,34 @@ export default function BlogPostPage() {
 
                                 {/* Main Article Content */}
                                 <div id="blog-content" className="
-                                    space-y-10
-                                    [&>h3]:text-2xl [&>h3]:md:text-4xl [&>h3]:font-black [&>h3]:text-slate-900 [&>h3]:mt-16 [&>h3]:mb-8 [&>h3]:tracking-tight
-                                    [&>p]:text-lg [&>p]:md:text-xl [&>p]:text-slate-600 [&>p]:leading-[1.8] [&>p]:mb-8
-                                    [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-3 [&>ul]:text-lg [&>ul]:text-slate-600 [&>ul]:mb-8
-                                    first-letter:[&>p:first-of-type]:text-5xl first-letter:[&>p:first-of-type]:md:text-7xl first-letter:[&>p:first-of-type]:font-black first-letter:[&>p:first-of-type]:text-blue-600 first-letter:[&>p:first-of-type]:float-left first-letter:[&>p:first-of-type]:mr-4 first-letter:[&>p:first-of-type]:mt-[-8px]
-                                " dangerouslySetInnerHTML={{ __html: post.content }} />
+    space-y-10
+    [&>h3]:text-2xl [&>h3]:md:text-4xl [&>h3]:font-black [&>h3]:text-slate-900 [&>h3]:mt-16 [&>h3]:mb-8 [&>h3]:tracking-tight
+    [&>p]:text-lg [&>p]:md:text-xl [&>p]:text-slate-600 [&>p]:leading-[1.8] [&>p]:mb-8
+    [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-3 [&>ul]:text-lg [&>ul]:text-slate-600 [&>ul]:mb-8
+">
+    <ReactMarkdown 
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={{
+            code({node, inline, className, children, ...props}) {
+                const match = /language-(\w+)/.exec(className || '')
+                return !inline ? (
+                    <pre className="bg-slate-900 text-white p-6 rounded-2xl mt-8 mb-8 overflow-x-auto">
+                        <code className={`language-${match?.[1]} ${className}`} {...props}>
+                            {children}
+                        </code>
+                    </pre>
+                ) : (
+                    <code className={className} {...props}>
+                        {children}
+                    </code>
+                )
+            }
+        }}
+    >
+        {post.content}
+    </ReactMarkdown>
+</div>
 
                                 {/* Bottom Feedback & Actions */}
                                 <div className="mt-20 pt-12 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-8">

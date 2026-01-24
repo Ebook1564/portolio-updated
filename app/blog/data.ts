@@ -14,24 +14,74 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
     {
         id: 1,
-        title: "The Future of HTML5 Gaming: Trends to Watch in 2024",
-        excerpt: "Explore the latest trends shaping the HTML5 gaming industry and what publishers need to know to stay ahead of the competition.",
+        title: "How to Dynamically Scale Background Components in Unity 2D",
+        excerpt: "Automatically scale UI, backgrounds, and sprites to match any orthographic camera viewport. Four modes (PreserveAspect, Fill, Stretch, Fit) handle all screen ratios perfectly for 2D games and prototypes.",
         content: `
-      <p>The gaming industry is constantly evolving, and HTML5 gaming is at the forefront of this revolution. As we move through 2024, several key trends are emerging that will shape the future of how we play and distribute games.</p>
-      
-      <h3>1. Cross-Platform Compatibility</h3>
-      <p>One of the biggest advantages of HTML5 is its ability to run on any device with a web browser. In 2024, we're seeing a massive shift towards "play anywhere" experiences. Developers are optimizing their games to provide seamless transitions between desktop and mobile play, ensuring users can pick up where they left off, regardless of the device.</p>
+# ScaleToCamera Script Tutorial
 
-      <h3>2. Improved Graphics and Performance</h3>
-      <p>Gone are the days of simple, pixelated web games. With the advancement of WebGL and WebGPU, HTML5 games are now offering console-quality graphics directly in the browser. This opens up new possibilities for immersive 3D experiences that were previously impossible without native apps.</p>
+Unity developers often need UI elements, backgrounds, or sprites to automatically scale with orthographic cameras across different screen sizes. This ScaleToCamera script solves that by dynamically adjusting any object's scale to match the camera's viewport using four flexible modes.
 
-      <h3>3. Social Integration</h3>
-      <p>Social features are becoming a standard in HTML5 games. From instant multiplayer matches to sharing high scores and achievements directly on social media platforms, the social aspect of gaming is being integrated more deeply than ever before.</p>
+## Script Overview
 
-      <h3>4. Monetization via Hybrid Models</h3>
-      <p>Publishers are moving beyond simple banner ads. In-game purchases, rewarded video ads, and subscription models are becoming increasingly popular in the HTML5 space.finding the right balance between monetization and user experience is key to success.</p>
+Attach this script to any GameObject with a Renderer component (like a SpriteRenderer or UI Image) as a child. The [ExecuteAlways] attribute ensures scaling works in both Play Mode and the Editor for instant previewing. It targets orthographic cameras only, calculating the world-space dimensions from orthographicSize and aspect ratio, then applies appropriate scaling.
 
-      <p>In conclusion, the future of HTML5 gaming looks incredibly bright. With better technology, wider adoption, and innovative monetization strategies, it's an exciting time for both developers and players alike.</p>
+**Key requirements:**
+- Orthographic camera assigned to the targetCamera field
+- Renderer on a child object (script measures its bounds)
+- Choose from PreserveAspect, Fill, Stretch, or Fit modes via the Inspector
+
+## How It Works
+
+The script runs in LateUpdate() to ensure camera transforms are finalized. It temporarily resets the object's scale to measure its "natural" size, then computes scale factors:
+
+\`\`\`
+worldHeight = orthographicSize * 2
+worldWidth = worldHeight * aspect
+scaleX = worldWidth / objectWidth
+scaleY = worldHeight / objectHeight
+\`\`\`
+
+**Each mode selects the final scale:**
+- **PreserveAspect**: Min(scaleX, scaleY) → Uniform fit without overflow
+- **Fill**: Max(scaleX, scaleY) → Fills viewport, may crop edges
+- **Stretch**: (scaleX, scaleY) → Exact pixel-perfect fill, distorts if needed
+- **Fit**: Min(scaleX, scaleY) → Safest, stays inside bounds with letterboxing
+
+## Setup Steps
+
+1. Create a GameObject (e.g., "Background") with a child SpriteRenderer or Quad
+2. Add the ScaleToCamera script to the parent
+3. Drag your orthographic Camera to the targetCamera field
+4. Select a ScaleMode and hit Play—watch it resize live
+5. Use [ExecuteAlways] to tweak in Scene view without entering Play Mode
+
+Test by changing Game view aspect ratios (16:9 → 4:3).
+
+## Usage Scenarios
+
+Perfect for 2D games, prototypes, and responsive UI:
+
+- **Game Backgrounds**: PreserveAspect covers playfield without distortion across mobile/desktop
+- **UI Panels/HUD**: Stretch for pixel-perfect buttons filling screen edges (hypercasual games)
+- **Dynamic Sprites**: Fill for full-screen effects like pause menus/loading screens
+- **Safe Layouts**: Fit prevents clipping on ultrawide monitors with automatic black bars
+- **Prototyping**: Scale placeholder art to any camera size during development
+
+Combine with Unity's Canvas Scaler for hybrid 2D/UI projects.
+
+## Customization Tips
+
+- **Z-Scale**: Locked at 1f—modify for 3D billboards
+- **Performance**: Cache Renderer reference (runs every frame in LateUpdate)
+- **Multi-Camera**: Duplicate script per camera or add camera switching
+- **Animation-Friendly**: Works with Animator since it overrides localScale
+
+**Smooth scaling extension:**
+\`\`\`csharp
+transform.localScale = Vector3.Lerp(transform.localScale, finalScale, Time.deltaTime * speed);
+\`\`\`
+
+Drop this into your Unity project and iterate!
     `,
         date: "March 15, 2024",
         category: "Gaming Trends",
