@@ -1,4 +1,4 @@
-import { Cpu, Sparkles, Layers, Zap, Code2, Gamepad2 } from "lucide-react"
+import { Cpu, Sparkles, Layers, Zap, Code2, Gamepad2, Gauge } from "lucide-react"
 
 // --- Type Definitions for Scalable Content ---
 export type GuideContentBlock =
@@ -212,5 +212,176 @@ export const gameDevGuides: GuideData[] = [
     ]},
 
   ]
+},
+{
+  id: 3,
+  title: "Custom Unity Intro Video: Complete Splash Screen Implementation",
+  excerpt: "Replace Unity's default splash screen with your branded intro video. Full scene setup, VideoPlayer configuration, and automatic scene transitions using C# scripting.",
+  category: "Unity",
+  date: "Jan 28, 2026",
+  author: "Prashant Saxena",
+  readTime: "7 min",
+  difficulty: "Intermediate",
+  icon: Gauge,
+  stats: "Zero Plugins",
+  content: [
+    { type: 'header', level: 2, text: "Professional Intro Video Scene" },
+    
+    { type: 'paragraph', text: "Replace Unity's default splash screen with your custom branded intro video. This tutorial creates a dedicated 'SplashVideo' scene that plays MP4/WebM videos full-screen and auto-transitions to your main menu using the VideoPlayer component and SceneManager." },
+    
+    { type: 'alert', variant: 'tip', title: "Video Format Priority", text: "MP4 (H.264) for Windows/Mac, WebM (VP8/VP9) for web builds. Max 1080p 30fps recommended for 60MB build size limit." },
+    
+    { type: 'header', level: 2, text: "Scene Setup (5 GameObjects)" },
+    
+    { type: 'list', style: 'ordered', items: [
+      "Create new scene → File → New Scene → Save as 'SplashVideo' (first in Build Settings)",
+      "Delete default Main Camera → Create → UI → Canvas (name: 'VideoCanvas')",
+      "Canvas → Canvas Scaler → UI Scale Mode: 'Scale With Screen Size' → Reference Resolution: 1920x1080",
+      "Right-click Canvas → UI → Raw Image (name: 'VideoDisplay') → Stretch to fill Canvas",
+      "GameObject → Create Empty → Name 'VideoManager' → Add SplashVideo script"
+    ]},
+    
+    { type: 'header', level: 3, text: "VideoPlayer Component Setup" },
+    
+    { type: 'grid', items: [
+      {
+        title: "✅ VideoDisplay (RawImage)",
+        list: ["Drag Canvas → VideoDisplay", "Raw Image component appears", "Texture field = empty (script fills)", "Stretch: Full Rect Transform"],
+        variant: 'good'
+      },
+      {
+        title: "🎥 VideoPlayer Assignment",
+        list: ["Select VideoManager", "VideoPlayer component auto-added", "Drag VideoDisplay to VideoPlayer.TargetTexture", "Video Clip: Drag your MP4/WebM"],
+        variant: 'good'
+      }
+    ]},
+    
+    { type: 'code', language: 'csharp', filename: 'SplashVideo.cs', code: `using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Video;
+
+public class SplashVideo : MonoBehaviour
+{
+    [Header("Video Settings")]
+    public VideoPlayer videoPlayer;
+    public string nextSceneName = "Menu";
+    
+    [Header("Skip Option")]
+    public KeyCode skipKey = KeyCode.Space;
+    
+    void Start()
+    {
+        // Safety checks
+        if (videoPlayer == null)
+            videoPlayer = GetComponent<VideoPlayer>();
+            
+        if (videoPlayer.targetTexture == null)
+        {
+            Debug.LogError("VideoPlayer: Assign RawImage Target Texture!");
+            return;
+        }
+        
+        videoPlayer.loopPointReached += OnVideoEnd;
+        videoPlayer.Play();
+    }
+    
+    void Update()
+    {
+        // Allow manual skip
+        if (Input.GetKeyDown(skipKey))
+            OnVideoEnd(videoPlayer);
+    }
+    
+    void OnVideoEnd(VideoPlayer vp)
+    {
+        SceneManager.LoadScene(nextSceneName);
+    }
+}` },
+    
+    { type: 'header', level: 3, text: "Inspector Configuration" },
+    
+    { type: 'table', headers: ["Field", "Setting", "Notes"], rows: [
+      ["Video Player", "VideoDisplay RawImage", "Drag from Hierarchy"],
+      ["Source", "Url (Video Clip)", "Drag MP4/WebM to field"],
+      ["Play On Awake", "False", "Script controls playback"],
+      ["Loop", "False", "Single playthrough"],
+      ["Skip On Dropout", "True", "Fallback if video fails"],
+      ["Next Scene Name", "\"Menu\"", "Exact Build Settings name"]
+    ]},
+    
+    { type: 'header', level: 2, text: "Build Settings Order" },
+    
+    { type: 'paragraph', text: "File → Build Settings → Scenes In Build. Drag 'SplashVideo' to Index 0, 'Menu' to Index 1+. Unity executes scenes in this exact order on startup." },
+    
+    { type: 'list', style: 'unordered', items: [
+      "Index 0: SplashVideo (auto-plays first)",
+      "Index 1: Menu (SplashVideo transitions here)",
+      "Index 2+: Gameplay scenes",
+      "Player Settings → Splash Screen → Show Unity Splash: Optional"
+    ]},
+    
+    { type: 'alert', variant: 'warning', title: "Scene Name Match", text: "nextSceneName = \"Menu\" must **exactly** match Build Settings scene name. Case-sensitive. No spaces or typos." },
+    
+    { type: 'header', level: 2, text: "Video Import Settings" },
+    
+    { type: 'list', style: 'ordered', items: [
+      "Drag MP4/WebM to Project → Inspector → Platform: Standalone",
+      "Transcode: Auto (H.264 baseline for Windows)",
+      "Resolution: Max 1920x1080 (file size limit)",
+      "Quality: 75% (balance size vs crispness)"
+    ]},
+    
+    { type: 'header', level: 2, text:"Advanced Features" },
+    
+    { type: 'code', language: 'csharp', filename: 'SplashVideoAdvanced.cs', code: `// Add to existing script
+[Header("Audio")]
+public AudioSource audioSource;
+
+void Start()
+{
+    // Audio sync
+    if (audioSource)
+        videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+        videoPlayer.SetDirectAudioVolume(0, 1.0f);
+        
+    // Loading screen fallback
+    AsyncOperation loadOp = SceneManager.LoadSceneAsync(nextSceneName);
+    loadOp.allowSceneActivation = false;
 }
+
+// Smooth scene transition
+void OnVideoEnd(VideoPlayer vp)
+{
+    loadOp.allowSceneActivation = true;
+}` },
+    
+    { type: 'header', level: 2, text: "Testing & Troubleshooting" },
+    
+    { type: 'grid', items: [
+      {
+        title: "✅ Green Light Checklist",
+        list: ["Video plays in Preview", "RawImage shows video", "Spacebar skips", "Menu scene loads"],
+        variant: 'good'
+      },
+      {
+        title: "🔧 Common Fixes",
+        list: ["Black screen → Check TargetTexture", "No audio → Add AudioSource", "Wrong scene → Verify Build order", "Video skips → Check import settings"],
+        variant: 'good'
+      }
+    ]},
+    
+    { type: 'header', level: 3, text: "Build Size Optimization" },
+    
+    { type: 'list', style: 'unordered', items: [
+      "Compress video to 50MB max (Handbrake + H.264)",
+      "Progressive download (no buffering)",
+      "Exclude from Android APK if not needed",
+      "WebGL: Use WebM VP9 for 40% size reduction"
+    ]},
+    
+    
+    { type: 'alert', variant: 'tip', title: "Pro Polish", text: "Add CanvasGroup → Fade Alpha 0→1 on Start(), 1→0 on skip. Sync with AudioSource reverb for cinematic feel." }
+  ]
+}
+
 ]

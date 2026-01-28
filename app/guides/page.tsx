@@ -109,7 +109,7 @@ export default function GuidesPage() {
                             transition={{ delay: 0.1 }}
                             className="text-xl md:text-2xl text-slate-400 mb-14 max-w-3xl mx-auto font-medium leading-relaxed"
                         >
-                            Deep technical blueprints and engineering strategies specifically designed for high-performance HTML5 game development.
+                            Deep technical blueprints and engineering strategies specifically designed for high-performance workflow for game development and auxiliary tasks.
                         </motion.p>
 
                         {/* <motion.div
@@ -148,7 +148,7 @@ export default function GuidesPage() {
                 {/* Technical Sticky Sub-Nav */}
                 <section className="sticky top-[110px] md:top-[130px] z-40 bg-white/80 backdrop-blur-xl border-y border-slate-200/60 py-5">
                     <div className="container mx-auto px-6 flex items-center justify-center gap-4 md:gap-8 overflow-x-auto no-scrollbar">
-                        {["all", "engine", "graphics", "multiplayer", "optimization"].map((tab) => (
+                        {["all", "Unity", "graphics", "Windows", "optimization"].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}

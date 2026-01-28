@@ -97,7 +97,7 @@ export default function Home() {
 
             {/* Dev Logs Carousel */}
             <CarouselSection 
-              title="Engineering DevLogs" 
+              title="News Articles" 
               subtitle="Real-world problem solving stories"
               href="/news"
               items={devLogs.slice(0, 8)}
@@ -199,6 +199,15 @@ function CarouselSection({
 
 // Horizontal Scrollable Carousel Component
 function Carousel({ items, gradient }: { items: any[], gradient: string }) {
+  const getItemPath = (item: any) => {
+    // Dynamic routing based on item type
+    if (item.topic) return `/news/${item.id}`        // DevLogs
+    if (item.difficulty === "Beginner" || item.difficulty === "Intermediate" || item.difficulty === "Advanced" || item.difficulty === "Expert") {
+      return item.category?.toLowerCase().includes('unity') ? `/tutorials/${item.id}` : `/guides/${item.id}`
+    }
+    return `/blog/${item.id}`                         // Blog posts
+  }
+
   return (
     <div className="relative">
       {/* Navigation Arrows */}
@@ -214,64 +223,65 @@ function Carousel({ items, gradient }: { items: any[], gradient: string }) {
         {items.map((item, index) => (
           <motion.div
             key={item.id}
-            className="flex-shrink-0 w-80 h-96 bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl shadow-2xl overflow-hidden snap-center hover:shadow-3xl transition-all duration-300 hover:-translate-y-2 border border-slate-200"
+            className="flex-shrink-0 w-80 h-96 cursor-pointer"
             whileHover={{ y: -8 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.05 }}
           >
-            {/* Card Image/Gradient */}
-            <div 
-              className={`h-48 bg-gradient-to-r ${gradient} relative overflow-hidden`}
-            >
-              {item.image && (
-                <img 
-                  src={item.image} 
-                  alt={item.title}
-                  className="w-full h-full object-cover opacity-20 absolute inset-0"
-                />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold text-white">
-                  {item.category || item.topic}
-                </span>
-              </div>
-            </div>
-
-            {/* Card Content */}
-            <div className="p-8">
-              <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
-                <span>{item.date}</span>
-                <span>•</span>
-                <span>{item.readTime || `${item.difficulty} • ${Math.floor(Math.random()*10)+1} min`}</span>
-              </div>
-              
-              <h3 className="font-black text-xl mb-4 leading-tight line-clamp-2 text-slate-900">
-                {item.title}
-              </h3>
-              
-              <p className="text-slate-600 text-sm mb-6 line-clamp-3 leading-relaxed">
-                {item.excerpt}
-              </p>
-              
-              <div className="flex items-center justify-between">
-                <span className="text-slate-500 text-sm font-semibold">
-                  {item.author}
-                </span>
-                <Link 
-                  href={`/${item.category?.toLowerCase() === 'unity' ? 'tutorials' : item.href || 'guides'}/${item.id}`}
-                  className="group flex items-center gap-1 text-blue-600 hover:text-blue-700 font-bold text-sm"
+            {/* ENTIRE CARD WRAPPED IN Link */}
+            <Link href={getItemPath(item)} className="block w-full h-full group">
+              <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl shadow-2xl overflow-hidden snap-center hover:shadow-3xl transition-all duration-300 border border-slate-200 h-full">
+                
+                {/* Card Image/Gradient */}
+                <div 
+                  className={`h-48 bg-gradient-to-r ${gradient} relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500`}
                 >
-                  Read →
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                  {item.image && (
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-full object-cover opacity-20 absolute inset-0"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold text-white">
+                      {item.category || item.topic}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <div className="p-8">
+                  <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                    <span>{item.date}</span>
+                    <span>•</span>
+                    <span>{item.readTime || `${item.difficulty || 'Guide'} • ${Math.floor(Math.random()*10)+1} min`}</span>
+                  </div>
+                  
+                  <h3 className="font-black text-xl mb-4 leading-tight line-clamp-2 text-slate-900 group-hover:text-blue-600 transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                  
+                  <p className="text-slate-600 text-sm mb-6 line-clamp-3 leading-relaxed">
+                    {item.excerpt}
+                  </p>
+                  
+                  <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                    <span className="text-slate-500 text-sm font-semibold">
+                      {item.author}
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-blue-600 translate-x-0 group-hover:translate-x-2 transition-transform duration-300" />
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           </motion.div>
         ))}
       </div>
     </div>
   )
 }
+

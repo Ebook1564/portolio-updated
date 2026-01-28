@@ -31,8 +31,8 @@ export interface TutorialData {
 export const tutorials: TutorialData[] = [
     {
         id: 1,
-        title: "Unity Editor Custom Themes Plugin" ,
-        excerpt: "Stylize your Unity working environment with a touch of colour",
+        title: " Stylize your Unity working environment with Unity Editor Custom Themes Plugin" ,
+        excerpt: "Improve monotonous visuals with a touch of colour",
         category: "Game Dev 101",
         difficulty: "Beginner",
         readTime: "2 min",
@@ -162,7 +162,7 @@ export const tutorials: TutorialData[] = [
       "BIOS: F12/Esc → Boot Menu → Select Ventoy USB",
       "UEFI: Disable Secure Boot (optional for Windows 11), F12 → USB first",
       "GRUB Menu appears → Arrow keys → Enter on desired ISO",
-      "ISO boots natively—no extraction needed"
+      "ISO boots natively, no extraction needed"
     ]},
     
     { type: 'header', level: 3, text: "Folder Organization" },
@@ -192,6 +192,7 @@ export const tutorials: TutorialData[] = [
         variant: 'good'
       }
     ]},
+    { type: 'alert', variant: 'tip', title: "Pro Workflow", text: "Keep 128GB USB with 20+ ISOs organized by category. Windows 10 repair + Ubuntu live + Hirens = complete toolkit under 30GB." },
     
     { type: 'header', level: 3, text: "USB Maintenance" },
     
@@ -201,9 +202,7 @@ export const tutorials: TutorialData[] = [
       "Reformat USB → Backup ISOs → Fresh Ventoy install"
     ]},
     
-    { type: 'alert', variant: 'tip', title: "Pro Workflow", text: "Keep 128GB USB with 20+ ISOs organized by category. Windows 10 repair + Ubuntu live + Hirens = complete toolkit under 30GB." },
     
-    { type: 'quote', text: "One USB replaces 10. The ultimate Windows 10 sysadmin weapon.", author: "IT Pro" }
-  ]
+      ]
 },
     ];
