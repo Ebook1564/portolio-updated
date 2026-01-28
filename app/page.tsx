@@ -89,7 +89,7 @@ export default function Home() {
             <CarouselSection 
               title="Tips and Tricks" 
               subtitle="Curated timesavers"
-              href="/guides"
+              href="/tips-and-tricks"
               items={tutorials.slice(0, 8)}
               icon={Code}
               gradient="from-emerald-500 to-teal-600"
