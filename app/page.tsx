@@ -87,9 +87,9 @@ export default function Home() {
 
             {/* Tutorials Carousel */}
             <CarouselSection 
-              title="Latest Tutorials" 
-              subtitle="Step-by-step technical walkthroughs"
-              href="/tutorials"
+              title="Tips and Tricks" 
+              subtitle="Curated timesavers"
+              href="/guides"
               items={tutorials.slice(0, 8)}
               icon={Code}
               gradient="from-emerald-500 to-teal-600"
