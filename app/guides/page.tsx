@@ -99,8 +99,8 @@ export default function GuidesPage() {
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.9] text-white"
                         >
-                            Master <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-[length:200%_auto] animate-gradient">Game Architecture</span>
+                            Everything required to simplify<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-[length:200%_auto] animate-gradient">Game Development</span>
                         </motion.h1>
 
                         <motion.p

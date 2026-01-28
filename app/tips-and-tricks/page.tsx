@@ -45,7 +45,7 @@ export default function TipsTricksPage() {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest mb-8"
                             >
-                                <Sparkles className="w-4 h-4" /> SnappGame Academy
+                                <Sparkles className="w-4 h-4" /> SnappGames Academy
                             </motion.div>
 
                             <motion.h1
@@ -54,8 +54,8 @@ export default function TipsTricksPage() {
                                 transition={{ delay: 0.1 }}
                                 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight"
                             >
-                                Master the Art of <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Game Creation</span>
+                                Simplify the
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400"> complications</span>
                             </motion.h1>
 
                             <motion.p
@@ -64,7 +64,7 @@ export default function TipsTricksPage() {
                                 transition={{ delay: 0.2 }}
                                 className="text-xl text-slate-400 max-w-2xl mx-auto mb-12"
                             >
-                                From zero to published. Interactive tutorials, video courses, and deep dives for developers of all levels.
+                                Neatly curated tips and tricks for various softwares to ease up your workflow
                             </motion.p>
 
                             {/* Search Bar */}
