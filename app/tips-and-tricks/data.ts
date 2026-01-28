@@ -46,7 +46,7 @@ export const tutorials: TutorialData[] = [
         content: [
             { type: 'header', level: 2, text: "Native Unity Editor Themes" },
     
-    { type: 'paragraph', text: "Editor Themes Plugin brings professional dark/light theme support to Unity on Windows 10. Install 14 Premade themes from Unity Asset Store, or make your own" },
+    { type: 'paragraph', text: "Editor Themes Plugin brings professional dark/light theme support to Unity. Choose from 14 different pre-made themes, or make your own" },
     
     { type: 'alert', variant: 'tip', title: "Windows 10 Optimized", text: "Perfect companion for Windows 10 Unity workflows. Themes persist across Editor restarts and project switches. No Unity version conflicts." },
     
@@ -103,7 +103,7 @@ export const tutorials: TutorialData[] = [
     {
         id: 2,
         title: "Boot from Multiple OSes conveniently using Ventoy",
-        excerpt: "Create a single USB drive that boots Windows 10, Windows 11, Ubuntu, Kali Linux, and recovery tools simultaneously. No reformatting—drag-and-drop ISOs forever.",
+        excerpt: "Create a single USB drive that boots into installation media while also having access to recovery tools. No reformatting required. Drag and drop ISOs forever.",
         category: "Sysadmin Tools",
         difficulty: "Intermediate",
         readTime: "15 min",
@@ -117,9 +117,9 @@ export const tutorials: TutorialData[] = [
         content: [
              { type: 'header', level: 2, text: "One USB, Infinite Operating Systems" },
     
-    { type: 'paragraph', text: "Ventoy transforms any USB drive into a multiboot powerhouse. Copy Windows 10, Windows 11, Ubuntu, Kali Linux, Hirens BootCD, and recovery ISOs to one drive—no reformatting required. Boot menu appears instantly on any PC." },
+    { type: 'paragraph', text: "Ventoy transforms any USB drive into a multiboot powerhouse. It allows you to utilize the same portable thumb drive for booting into a Windows/Linux Installation Medium or make use of recovery tools and utilities such as HirensLiveCD or MemTest86. This allows you to maximize your flash drives both in terms of storage as well as functionality." },
     
-    { type: 'alert', variant: 'tip', title: "USB Capacity Matters", text: "16GB minimum, 128GB+ recommended. NTFS/exFAT formatting supports massive ISO collections (50+ ISOs easily)." },
+    { type: 'alert', variant: 'tip', title: "USB Capacity Matters", text: "16GB minimum, 128GB+ recommended. NTFS/exFAT formatting supports massive ISO collections." },
     
     { type: 'header', level: 2, text: "5-Minute USB Creation" },
     
@@ -132,19 +132,21 @@ export const tutorials: TutorialData[] = [
     
     { type: 'alert', variant: 'warning', title: "Backup First!", text: "Ventoy **erases entire USB**. Double-check drive selection—target is **not** your system drive." },
     
-    { type: 'header', level: 2, text: "Supported OS Collection" },
+    { type: 'header', level: 2, text: "Supported OS and Features" },
     
+    { type: 'paragraph', text: "Ventoy is extremely flexible in the kinds of operating systems and bootable images it supports, because it doesn’t care what OS you put on the USB drive (as long as it’s a bootable image). You simply format a USB once with Ventoy, copy your .ISO/.WIM/.IMG/.VHD(x) files onto it, and Ventoy will give you a boot menu for them." },
+        
     { type: 'grid', items: [
-      {
+        {
         title: "🪟 Windows ISOs",
-        list: ["Windows 10 (all editions)", "Windows 11 (TPM bypass)", "Windows Server 2022", "WinPE Rescue"],
+        list: ["Most desktop versions: e.g., Windows 7, 8, 8.1, 10, 11", "Windows Server Editions", "WinPE/WinRE environments"],
         variant: 'good'
-      },
-      {
+    },
+    {
         title: "🐧 Linux Distros",
-        list: ["Ubuntu 24.04 LTS", "Kali Linux", "Linux Mint", "Fedora Workstation", "Arch Linux"],
+        list: ["Covers nearly all popular distros (Ubuntu, Fedora, Debian, Mint, Arch, Manjaro, Kali, CentOS, RHEL, openSUSE, etc.).", "Live USBs, installers, rescue systems like Parted Magic, SystemRescue, etc.",],
         variant: 'good'
-      }
+    }
     ]},
     
     { type: 'header', level: 3, text: "Windows 10/11 Specifics" },
@@ -159,14 +161,15 @@ export const tutorials: TutorialData[] = [
     { type: 'header', level: 2, text: "BIOS/UEFI Boot Setup" },
     
     { type: 'list', style: 'unordered', items: [
-      "BIOS: F12/Esc → Boot Menu → Select Ventoy USB",
-      "UEFI: Disable Secure Boot (optional for Windows 11), F12 → USB first",
-      "GRUB Menu appears → Arrow keys → Enter on desired ISO",
-      "ISO boots natively, no extraction needed"
+        "BIOS: F12/Esc → Boot Menu → Select Ventoy USB",
+        "UEFI: Disable Secure Boot (optional for Windows 11), F12 → USB first",
+        "GRUB Menu appears → Arrow keys → Enter on desired ISO",
+        "ISO boots natively, no extraction needed"
     ]},
     
     { type: 'header', level: 3, text: "Folder Organization" },
-    
+        { type: 'paragraph', text: "Ventoy can scan recursively upto root + 1 folders i.e. only within folders immediately located in the root directory of the drive, for bootable images in supported formats, thus allowing you to create folder structures as per your convenience. Below is one such example: " },
+
     { type: 'code', language: 'bash', filename: 'USB-Structure.txt', code: `Ventoy-USB/
 ├── Windows/
 │   ├── Win10.iso
@@ -178,7 +181,7 @@ export const tutorials: TutorialData[] = [
     ├── Hirens-BootCD.iso
     └── MemTest86.iso` },
     
-    { type: 'header', level: 2, text: "Windows 10 Troubleshooting" },
+    { type: 'header', level: 2, text: "Windows Troubleshooting" },
     
     { type: 'grid', items: [
       {

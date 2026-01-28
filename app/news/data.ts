@@ -40,7 +40,7 @@ export const devLogs: GameDevLog[] = [
         id: 1,
   title: "Prince of Persia Remake: 3 Years of Work Erased Overnight",
   topic: "Gaming",
-  excerpt: "Voice actress Eman Ayaz spent 3 years on Ubisoft's cancelled Sands of Time remake and learned about it via WhatsApp—not from the studio. A leaked internal demo fueled the fallout.",
+  excerpt: "Voice actress Eman Ayaz spent 3 years on Ubisoft's cancelled Sands of Time remake and learned about it via WhatsApp, not from the studio. A leaked internal demo fueled the fallout.",
   date: "Jan 28, 2026",
   readTime: "6 min read",
   author: "Prashant Saxena",
@@ -50,7 +50,7 @@ export const devLogs: GameDevLog[] = [
   
   challenge: {
     title: "Silent Cancellation",
-    description: "Eman Ayaz delivered what she called her career-best performance over 3 years, only to discover the project's cancellation through family WhatsApp messages—not Ubisoft channels.",
+    description: "Eman Ayaz delivered what she called her career-best performance over 3 years, only to discover the project's cancellation through family WhatsApp messages instead of an official channel.",
     icon: "bug"
   },
   
@@ -65,9 +65,11 @@ export const devLogs: GameDevLog[] = [
   content: [
     { type: 'header', level: 2, text: "3 Years Disappears in Silence" },
     
-    { type: 'paragraph', text: "Eman Ayaz believed she was Farah Farah—Prince of Persia's iconic companion—for what she called her career's best performance. After three years of motion capture and voice work, she learned via family WhatsApp messages that Ubisoft cancelled Prince of Persia: The Sands of Time remake." },
+    { type: 'paragraph', text: "Eman Ayaz believed she was Farah Farah, Prince of Persia's iconic companion, for what she called her career's best performance. After three years of motion capture and voice work, she learned via family WhatsApp messages that Ubisoft cancelled Prince of Persia: The Sands of Time remake." },
     
     { type: 'alert', variant: 'warning', title: "NDA Blackout", text: "Bound by non-disclosure agreement, Ayaz cannot name the project directly. Her grief compounds knowing the performance may never see daylight." },
+    
+    { type: 'paragraph', text: "Bound by non-disclosure agreement, Ayaz cannot name the project directly. Her grief compounds knowing the performance may never see daylight." },
     
     { type: 'header', level: 2, text: "Leaked Internal Build" },
     
@@ -114,7 +116,7 @@ export const devLogs: GameDevLog[] = [
     
     { type: 'header', level: 2, text:"The Bigger Picture" },
     
-    { type: 'paragraph', text: "Sands of Time remake joins Ghost Recon Frontline and others in Ubisoft's cancellation graveyard. The leaked demo—now memory-holed—served as unintended postmortem for a promising revival that never shipped." },
+    { type: 'paragraph', text: "Sands of Time remake joins Ghost Recon Frontline and 5 other unnamed IPs in Ubisoft's cancellation graveyard. The leaked demo, now memory-holed, served as unintended postmortem for a promising revival that never shipped." },
     
     { type: 'grid', items: [
       {
@@ -127,10 +129,7 @@ export const devLogs: GameDevLog[] = [
         list: ["Quiet cancellations", "Copyright enforcement", "No public acknowledgment", "Resource reallocation"],
         variant: 'bad'
       }
-    ]},
-    
-    { type: 'quote', text: "The human cost of game cancellation lives beyond the studio walls.", author: "Industry analyst" }
-  ]
+    ]},  ]
 },
     {
   id: 3,

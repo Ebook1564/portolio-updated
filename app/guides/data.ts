@@ -132,7 +132,7 @@ export const gameDevGuides: GuideData[] = [
     { type: 'header', level: 2, text: "Lightning-Fast Installation" },
     
     { type: 'list', style: 'ordered', items: [
-      "Download QTTabBar from [official GitHub](https://github.com/indiff/qttabbar) (v1043 is latest stable)",
+      "Download QTTabBar from [official GitHub](https://github.com/indiff/qttabbar)",
       "Extract ZIP → Run QTTabBar.exe as Administrator (one-time setup)",
       "Accept UAC → Check 'Register QTTabBar shell extension' → Finish",
       "Restart Explorer.exe (Task Manager → End task → File → Run new task → explorer.exe)"
@@ -215,7 +215,7 @@ export const gameDevGuides: GuideData[] = [
 },
 {
   id: 3,
-  title: "Custom Unity Intro Video: Complete Splash Screen Implementation",
+  title: "Custom Intro Video for a Game in Unity: Complete Splash Screen Implementation",
   excerpt: "Replace Unity's default splash screen with your branded intro video. Full scene setup, VideoPlayer configuration, and automatic scene transitions using C# scripting.",
   category: "Unity",
   date: "Jan 28, 2026",
