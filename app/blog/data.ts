@@ -220,7 +220,7 @@ It’s modular, inspector-driven, and easy to extend — whether for looping bac
 `,
         date: "March 15, 2024",
         category: "Gaming Trends",
-        readTime: "5 min read",
+        readTime: "10 min read",
         author: "Alex Rivera",
         image: "from-blue-500 to-indigo-600"
     },

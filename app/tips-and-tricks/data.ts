@@ -30,77 +30,78 @@ export interface TutorialData {
 
 export const tutorials: TutorialData[] = [
     {
-        id: 1,
-        title: " Stylize your Unity working environment with Unity Editor Custom Themes Plugin" ,
-        excerpt: "Improve monotonous visuals with a touch of colour",
-        category: "Game Dev 101",
-        difficulty: "Beginner",
-        readTime: "2 min",
-        author: "Alex Rivers",
-        avatar: "AR",
-        date: "Jan 15, 2026",
-        icon: Video,
-        color: "blue",
-        heroImage: "from-blue-500 to-indigo-500",
-        stats: "15 Lessons",
-        content: [
-            { type: 'header', level: 2, text: "Native Unity Editor Themes" },
+    //     id: 1,
+    //     title: " Stylize your Unity working environment with Unity Editor Custom Themes Plugin" ,
+    //     excerpt: "Improve monotonous visuals with a touch of colour",
+    //     category: "Game Dev 101",
+    //     difficulty: "Beginner",
+    //     readTime: "2 min",
+    //     author: "Alex Rivers",
+    //     avatar: "AR",
+    //     date: "Jan 15, 2026",
+    //     icon: Video,
+    //     color: "blue",
+    //     heroImage: "from-blue-500 to-indigo-500",
+    //     stats: "15 Lessons",
+    //     content: [
+    //         { type: 'header', level: 2, text: "Native Unity Editor Themes" },
     
-    { type: 'paragraph', text: "Editor Themes Plugin brings professional dark/light theme support to Unity. Choose from 14 different pre-made themes, or make your own" },
+    // { type: 'paragraph', text: "Editor Themes Plugin brings professional dark/light theme support to Unity. Choose from 14 different pre-made themes, or make your own" },
     
-    { type: 'alert', variant: 'tip', title: "Windows 10 Optimized", text: "Perfect companion for Windows 10 Unity workflows. Themes persist across Editor restarts and project switches. No Unity version conflicts." },
+    // { type: 'paragraph', text: "The plugin comes with 14 presets, consisting of dark and light themes, while also allowing you to create your own. " },
     
-    { type: 'header', level: 2, text: "One-Click Asset Store Installation" },
+    // { type: 'header', level: 2, text: "One-Click Asset Store Installation" },
     
-    { type: 'list', style: 'ordered', items: [
-      "Visit [Unity Asset Store](https://assetstore.unity.com/packages/tools/gui/editor-themes-plugin-free-211041) and click 'Add to My Assets'",
-      "In your Unity Editor's menu bar, navigate to  Window → Package Manager → My Assets → Search 'Editor Themes' → Import",
-      "Tools → Editor Themes → Theme Manager (Ctrl+Shift+T)",
-      "Browse themes → Click Apply → Instant visual refresh"
-    ]},
-    
-    
-    { type: 'header', level: 2, text: "Pre-Built Theme Picks" },
-    
-    { type: 'grid', items: [
-      {
-        title: "🌙 Dark Themes",
-        list: ["One Dark Pro", "Dracula Pro", "Nord Polar", "Material Dark", "Monokai Pro"],
-        variant: 'good'
-      },
-      {
-        title: "☀️ Light Themes",
-        list: ["Solarized Light", "GitHub Light", "Visual Studio", "One Light"],
-        variant: 'good'
-      }
-    ]},
-        
-    { type: 'header', level: 2, text: "Windows 10 Troubleshooting" },
-    
-    { type: 'grid', items: [
-      {
-        title: "🔧 Installation Fixes",
-        list: ["Run Package Manager as Administrator", "Clear Unity Cache (Edit → Preferences → GI Cache)", "Restart Unity after import"],
-        variant: 'good'
-      },
-      {
-        title: "🎨 Theme Not Applying",
-        list: ["Tools → Editor Themes → Refresh Cache", "Reimport package via Package Manager", "Check Unity version compatibility"],
-        variant: 'good'
-      }
-    ]},
-    
-    { type: 'header', level: 3, text: "Personalized Tweaks" },
-    
-    { type: 'list', style: 'unordered', items: [
-      '"Per-Project Themes" - The package needs to be imported on a per project basis, thus allowing the flexibility of having different themes for different projects.',
-      '"Export Themes" - Premade Themes can be customized and custom ones can be created from scratch and shared for added personalization.'
-    ]},
+    // { type: 'list', style: 'ordered', items: [
+    //     "Visit [Unity Asset Store](https://assetstore.unity.com/packages/tools/gui/editor-themes-plugin-free-211041) and click 'Add to My Assets'",
+    //     "In your Unity Editor's menu bar, navigate to  Window → Package Manager → My Assets → Search 'Editor Themes' → Import",
+    //     "Tools → Editor Themes → Theme Manager (Ctrl+Shift+T)",
+    //     "Browse themes → Click Apply → Instant visual refresh"
+    // ]},
     
     
-        ]
-    },
-    {
+    // { type: 'header', level: 2, text: "Pre-Built Theme Picks" },
+    
+    // { type: 'grid', items: [
+    //     {
+    //         title: "🌙 Dark Themes",
+    //         list: ["Alien", "Amoled", "Blue Glow", "Darker", "Deep Blue", "Deep Gray", "Default Vibe", "Fruity Amoled", "Raspberry", "Grey Blue Dot", "Redish" ],
+    //         variant: 'good'
+    //     },
+    //     {
+    //         title: "☀️ Light Themes",
+    //         list: ["Bluinty", "Dark Vibe", "Fruity Light", "Sunrise", "Super Light"],
+    //         variant: 'good'
+    //     }
+    // ]},
+    // { type: 'paragraph', text: "If you find colours that you are unable to modify directly with then Theme Editor window, you can directly look for their intented identifiers using the IMGUI Debugger tool from the Dear ImGui library for Unity." },
+    
+    // { type: 'header', level: 2, text: "Windows 10 Troubleshooting" },
+    
+    // { type: 'grid', items: [
+    //   {
+    //     title: "🔧 Installation Fixes",
+    //     list: ["Run Package Manager as Administrator", "Clear Unity Cache (Edit → Preferences → GI Cache)", "Restart Unity after import"],
+    //     variant: 'good'
+    //   },
+    //   {
+    //     title: "🎨 Theme Not Applying",
+    //     list: ["Tools → Editor Themes → Refresh Cache", "Reimport package via Package Manager", "Check Unity version compatibility"],
+    //     variant: 'good'
+    //   }
+    // ]},
+    
+    // { type: 'header', level: 3, text: "Personalized Tweaks" },
+    
+    // { type: 'list', style: 'unordered', items: [
+    //   '"Per-Project Themes" - The package needs to be imported on a per project basis, thus allowing the flexibility of having different themes for different projects.',
+    //   '"Export Themes" - Premade Themes can be customized and custom ones can be created from scratch and shared for added personalization.'
+    // ]},
+    
+    
+    //     ]
+    // },
+    // {
         id: 2,
         title: "Boot from Multiple OSes conveniently using Ventoy",
         excerpt: "Create a single USB drive that boots into installation media while also having access to recovery tools. No reformatting required. Drag and drop ISOs forever.",
