@@ -213,10 +213,10 @@ export default function GameCaseStudyPage() {
                                 {/* Tech Stack Footer Tags */}
                                 <div className="mt-16 pt-10 border-t border-slate-100">
                                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-3">
-                                        <Cpu className="w-4 h-4 text-blue-500" /> Primary Tech Stack
+                                        <Cpu className="w-4 h-4 text-blue-500" /> Key Topics Discussed
                                     </h4>
                                     <div className="flex flex-wrap gap-3">
-                                        {log.techStack.map(tech => (
+                                        {log.keyTopics.map(tech => (
                                             <span key={tech} className="px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold text-slate-600 hover:bg-white hover:border-blue-200 hover:text-blue-600 transition-all cursor-default shadow-sm active:scale-95">
                                                 {tech}
                                             </span>

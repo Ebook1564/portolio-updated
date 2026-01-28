@@ -31,11 +31,11 @@ export interface TutorialData {
 export const tutorials: TutorialData[] = [
     {
         id: 1,
-        title: "Building a Flappy Bird Clone in 10 Minutes",
-        excerpt: "A rapid-fire crash course on game loops, gravity simulation, and collision detection using vanilla JavaScript.",
+        title: "Unity Editor Custom Themes Plugin" ,
+        excerpt: "Stylize your Unity working environment with a touch of colour",
         category: "Game Dev 101",
         difficulty: "Beginner",
-        readTime: "10 min",
+        readTime: "2 min",
         author: "Alex Rivers",
         avatar: "AR",
         date: "Jan 15, 2026",
@@ -44,25 +44,67 @@ export const tutorials: TutorialData[] = [
         heroImage: "from-blue-500 to-indigo-500",
         stats: "15 Lessons",
         content: [
-            { type: 'header', level: 2, text: "Setting Up the Canvas" },
-            { type: 'paragraph', text: "First, we need a simple HTML5 Canvas element. This will be our rendering context." },
-            { type: 'code', language: 'html', code: '<canvas id="game" width="320" height="480"></canvas>' },
-            { type: 'header', level: 2, text: "The Game Loop" },
-            { type: 'paragraph', text: "We use requestAnimationFrame to drive our game at 60fps." },
-            {
-                type: 'code', language: 'javascript', code: `function loop() {
-    update();
-    draw();
-    requestAnimationFrame(loop);
-}
-loop();` }
+            { type: 'header', level: 2, text: "Native Unity Editor Themes" },
+    
+    { type: 'paragraph', text: "Editor Themes Plugin brings professional dark/light theme support to Unity on Windows 10. Install 14 Premade themes from Unity Asset Store, or make your own" },
+    
+    { type: 'alert', variant: 'tip', title: "Windows 10 Optimized", text: "Perfect companion for Windows 10 Unity workflows. Themes persist across Editor restarts and project switches. No Unity version conflicts." },
+    
+    { type: 'header', level: 2, text: "One-Click Asset Store Installation" },
+    
+    { type: 'list', style: 'ordered', items: [
+      "Visit [Unity Asset Store](https://assetstore.unity.com/packages/tools/gui/editor-themes-plugin-free-211041) and click 'Add to My Assets'",
+      "In your Unity Editor's menu bar, navigate to  Window → Package Manager → My Assets → Search 'Editor Themes' → Import",
+      "Tools → Editor Themes → Theme Manager (Ctrl+Shift+T)",
+      "Browse themes → Click Apply → Instant visual refresh"
+    ]},
+    
+    
+    { type: 'header', level: 2, text: "Pre-Built Theme Picks" },
+    
+    { type: 'grid', items: [
+      {
+        title: "🌙 Dark Themes",
+        list: ["One Dark Pro", "Dracula Pro", "Nord Polar", "Material Dark", "Monokai Pro"],
+        variant: 'good'
+      },
+      {
+        title: "☀️ Light Themes",
+        list: ["Solarized Light", "GitHub Light", "Visual Studio", "One Light"],
+        variant: 'good'
+      }
+    ]},
+        
+    { type: 'header', level: 2, text: "Windows 10 Troubleshooting" },
+    
+    { type: 'grid', items: [
+      {
+        title: "🔧 Installation Fixes",
+        list: ["Run Package Manager as Administrator", "Clear Unity Cache (Edit → Preferences → GI Cache)", "Restart Unity after import"],
+        variant: 'good'
+      },
+      {
+        title: "🎨 Theme Not Applying",
+        list: ["Tools → Editor Themes → Refresh Cache", "Reimport package via Package Manager", "Check Unity version compatibility"],
+        variant: 'good'
+      }
+    ]},
+    
+    { type: 'header', level: 3, text: "Personalized Tweaks" },
+    
+    { type: 'list', style: 'unordered', items: [
+      '"Per-Project Themes" - The package needs to be imported on a per project basis, thus allowing the flexibility of having different themes for different projects.',
+      '"Export Themes" - Premade Themes can be customized and custom ones can be created from scratch and shared for added personalization.'
+    ]},
+    
+    
         ]
     },
     {
         id: 2,
-        title: "Mastering CSS Grid for Game UI",
-        excerpt: "Stop struggling with absolute positioning. Learn how to create responsive HUDs and inventory systems with CSS Grid.",
-        category: "UI Design",
+        title: "Boot from Multiple OSes conveniently using Ventoy",
+        excerpt: "Create a single USB drive that boots Windows 10, Windows 11, Ubuntu, Kali Linux, and recovery tools simultaneously. No reformatting—drag-and-drop ISOs forever.",
+        category: "Sysadmin Tools",
         difficulty: "Intermediate",
         readTime: "15 min",
         author: "Sarah Chen",
@@ -73,84 +115,95 @@ loop();` }
         heroImage: "from-indigo-500 to-violet-500",
         stats: "Top Rated",
         content: [
-            { type: 'header', level: 2, text: "Why Grid?" },
-            { type: 'paragraph', text: "CSS Grid allows you to map out your UI in 2D space, perfect for inventory slots." }
-        ]
-    },
-    {
-        id: 3,
-        title: "Monetization 101: Ads vs IAP",
-        excerpt: "Data-driven insights on when to use Rewarded Video ads versus attempting In-App Purchases for casual web games.",
-        category: "Business",
-        difficulty: "Advanced",
-        readTime: "8 min",
-        author: "Mike Ross",
-        avatar: "MR",
-        date: "Jan 08, 2026",
-        icon: DollarSign,
-        color: "violet",
-        heroImage: "from-violet-500 to-purple-500",
-        stats: "Commercial",
-        content: [
-            { type: 'header', level: 2, text: "The Casual Economy" },
-            { type: 'paragraph', text: "For hyper-casual games, retention is short. Monetize early with ads." }
-        ]
-    },
-    {
-        id: 4,
-        title: "Publishing Your First Game to SnappGame",
-        excerpt: "Walkthrough of the submission process, art requirements, and how to pass the quality assurance review on day one.",
-        category: "Platform",
-        difficulty: "Beginner",
-        readTime: "5 min",
-        author: "Team Snapp",
-        avatar: "TS",
-        date: "Jan 05, 2026",
-        icon: Upload,
-        color: "blue",
-        heroImage: "from-blue-400 to-cyan-400",
-        stats: "Platform Core",
-        content: [
-            { type: 'header', level: 2, text: "Checklist" },
-            { type: 'list', style: 'unordered', items: ["Export to HTML5", "720p Screenshots", "Description"] }
-        ]
-    },
-    {
-        id: 5,
-        title: "Advanced Sprite Animation Tools",
-        excerpt: "Reviewing the top tools in 2026 for creating fluid 2D animations: Spine, DragonBones, and Aseprite.",
-        category: "Art",
-        difficulty: "Intermediate",
-        readTime: "12 min",
-        author: "Lisa Wong",
-        avatar: "LW",
-        date: "Jan 02, 2026",
-        icon: PenTool,
-        color: "indigo",
-        heroImage: "from-indigo-400 to-blue-500",
-        stats: "Technical Pick",
-        content: [
-            { type: 'header', level: 2, text: "Skeletal vs Frame-by-Frame" },
-            { type: 'paragraph', text: "Spine uses bones. Aseprite is pixel art." }
-        ]
-    },
-    {
-        id: 6,
-        title: "WebGPU: Is It Ready?",
-        excerpt: "A look at the current state of WebGPU support across browsers and if you should switch from WebGL2 yet.",
-        category: "Tech",
-        difficulty: "Expert",
-        readTime: "10 min",
-        author: "Dev Team",
-        avatar: "DT",
-        date: "Dec 28, 2025",
-        icon: Code,
-        color: "cyan",
-        heroImage: "from-cyan-500 to-blue-500",
-        stats: "High Complexity",
-        content: [
-            { type: 'header', level: 2, text: "Performance Gains" },
-            { type: 'paragraph', text: "Compute shaders allow physics on the GPU." }
-        ]
-    }
-];
+             { type: 'header', level: 2, text: "One USB, Infinite Operating Systems" },
+    
+    { type: 'paragraph', text: "Ventoy transforms any USB drive into a multiboot powerhouse. Copy Windows 10, Windows 11, Ubuntu, Kali Linux, Hirens BootCD, and recovery ISOs to one drive—no reformatting required. Boot menu appears instantly on any PC." },
+    
+    { type: 'alert', variant: 'tip', title: "USB Capacity Matters", text: "16GB minimum, 128GB+ recommended. NTFS/exFAT formatting supports massive ISO collections (50+ ISOs easily)." },
+    
+    { type: 'header', level: 2, text: "5-Minute USB Creation" },
+    
+    { type: 'list', style: 'ordered', items: [
+      "Download [Ventoy](https://www.ventoy.net/en/index.html) → Extract ZIP → Run Ventoy2Disk.exe as Administrator",
+      "Select target USB → Install (creates 2 partitions: tiny Ventoy + large data)",
+      "Copy ISOs directly to larger partition (Windows/Linux/Recovery)",
+      "Boot USB → Select any ISO → Install instantly"
+    ]},
+    
+    { type: 'alert', variant: 'warning', title: "Backup First!", text: "Ventoy **erases entire USB**. Double-check drive selection—target is **not** your system drive." },
+    
+    { type: 'header', level: 2, text: "Supported OS Collection" },
+    
+    { type: 'grid', items: [
+      {
+        title: "🪟 Windows ISOs",
+        list: ["Windows 10 (all editions)", "Windows 11 (TPM bypass)", "Windows Server 2022", "WinPE Rescue"],
+        variant: 'good'
+      },
+      {
+        title: "🐧 Linux Distros",
+        list: ["Ubuntu 24.04 LTS", "Kali Linux", "Linux Mint", "Fedora Workstation", "Arch Linux"],
+        variant: 'good'
+      }
+    ]},
+    
+    { type: 'header', level: 3, text: "Windows 10/11 Specifics" },
+    
+    { type: 'table', headers: ["ISO Type", "BIOS/UEFI", "Notes"], rows: [
+      ["Windows 10", "Both", "All editions supported"],
+      ["Windows 11", "UEFI", "Auto-bypasses TPM/Secure Boot"],
+      ["WinPE 10/11", "Both", "Perfect for repairs"],
+      ["Ubuntu 24.04", "Both", "Ventoy persistence support"]
+    ]},
+    
+    { type: 'header', level: 2, text: "BIOS/UEFI Boot Setup" },
+    
+    { type: 'list', style: 'unordered', items: [
+      "BIOS: F12/Esc → Boot Menu → Select Ventoy USB",
+      "UEFI: Disable Secure Boot (optional for Windows 11), F12 → USB first",
+      "GRUB Menu appears → Arrow keys → Enter on desired ISO",
+      "ISO boots natively—no extraction needed"
+    ]},
+    
+    { type: 'header', level: 3, text: "Folder Organization" },
+    
+    { type: 'code', language: 'bash', filename: 'USB-Structure.txt', code: `Ventoy-USB/
+├── Windows/
+│   ├── Win10.iso
+│   ├── Win11.iso
+├── Linux/
+│   ├── Ubuntu-24.04.iso
+│   └── Kali-Linux.iso
+└── Tools/
+    ├── Hirens-BootCD.iso
+    └── MemTest86.iso` },
+    
+    { type: 'header', level: 2, text: "Windows 10 Troubleshooting" },
+    
+    { type: 'grid', items: [
+      {
+        title: "🔧 Boot Failures",
+        list: ["USB → BIOS first (not CSM/Legacy)", "Disable Secure Boot for Linux", "Recreate Ventoy (Ventoy2Disk.exe → Install)"],
+        variant: 'good'
+      },
+      {
+        title: "📁 ISO Not Listed",
+        list: ["Only root + 1 subfolder deep", "ISO/WIM/IMG/EFI files only", ".iso extension required"],
+        variant: 'good'
+      }
+    ]},
+    
+    { type: 'header', level: 3, text: "USB Maintenance" },
+    
+    { type: 'list', style: 'ordered', items: [
+      "Add new ISOs → Eject → Reboot → Auto-detected",
+      "Update Ventoy → Run Ventoy2Disk.exe → 'Update' (preserves data)",
+      "Reformat USB → Backup ISOs → Fresh Ventoy install"
+    ]},
+    
+    { type: 'alert', variant: 'tip', title: "Pro Workflow", text: "Keep 128GB USB with 20+ ISOs organized by category. Windows 10 repair + Ubuntu live + Hirens = complete toolkit under 30GB." },
+    
+    { type: 'quote', text: "One USB replaces 10. The ultimate Windows 10 sysadmin weapon.", author: "IT Pro" }
+  ]
+},
+    ];

@@ -135,7 +135,7 @@ export default function NewsPage() {
                             <Cpu className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <span className="block text-white font-bold text-sm tracking-tight">{featuredLog.techStack[0]}</span>
+                            <span className="block text-white font-bold text-sm tracking-tight">{featuredLog.keyTopics[0]}</span>
                             <span className="block text-slate-400 text-xs font-medium">Core Tech</span>
                           </div>
                         </div>
