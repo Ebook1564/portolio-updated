@@ -36,7 +36,7 @@ export default function NewsPage() {
               className="inline-flex items-center gap-3 px-6 py-2 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-md"
             >
               <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
-              <span className="text-blue-400 text-sm font-black tracking-[0.2em] uppercase">Insights and Trends</span>
+              <span className="text-blue-400 text-sm font-black tracking-[0.2em] uppercase">Industry Headlines</span>
             </motion.div>
 
             <motion.h1
