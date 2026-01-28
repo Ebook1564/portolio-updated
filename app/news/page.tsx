@@ -36,7 +36,7 @@ export default function NewsPage() {
               className="inline-flex items-center gap-3 px-6 py-2 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-md"
             >
               <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
-              <span className="text-blue-400 text-sm font-black tracking-[0.2em] uppercase">Engineering Showcase</span>
+              <span className="text-blue-400 text-sm font-black tracking-[0.2em] uppercase">Insights and Trends</span>
             </motion.div>
 
             <motion.h1
@@ -56,7 +56,7 @@ export default function NewsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              Real engineering challenges we faced in production. Real solutions we deployed to solve them.
+              Latest developments from various walks of Technology and the key takeaways we can draw from them.
             </motion.p>
           </div>
         </section>

@@ -66,7 +66,7 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">SnappGame</span> Blog
+              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">SnappGames</span> Blog
             </motion.h1>
 
             <motion.p
@@ -75,7 +75,7 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              Stay ahead with the latest industry news, monetization strategies, and deep dives into the future of gaming.
+              Stay ahead with the latest development logs, optimization strategies, and deep dives into the future of gaming.
             </motion.p>
           </div>
         </section>
