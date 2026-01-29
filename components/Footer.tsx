@@ -27,12 +27,7 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest text-[#60A5FA]">Company</h4>
             <ul className="space-y-4 text-sm">
-              <li>
-                <Link href="/about" className="hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                  About Us
-                </Link>
-              </li>
+             
               <li>
                 <Link href="/privacy" className="hover:text-white transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -84,15 +79,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-white transition-colors hover:translate-x-1 block transition-transform">
+                <Link href="/news" className="hover:text-white transition-colors hover:translate-x-1 block transition-transform">
                   Latest News
                 </Link>
               </li>
-              <li>
-                <Link href="/blog" className="hover:text-white transition-colors hover:translate-x-1 block transition-transform">
-                  Industry Updates
-                </Link>
-              </li>
+              
             </ul>
           </div>
 
@@ -106,9 +97,7 @@ export function Footer() {
               <Link href="/privacy" className="hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
-                Terms of Use
-              </Link>
+             
             </div>
             <p className="text-center md:text-right flex items-center gap-2">
               © 2026 SnappGames Technologies. Made with <Heart className="w-3 h-3 text-red-500 fill-current" />

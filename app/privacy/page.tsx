@@ -65,7 +65,7 @@ export default function PrivacyPage() {
                                 If you have any questions about this privacy policy or our privacy practices, please contact us at:
                             </p>
                             <div className="mt-4 p-4 bg-white/5 rounded-xl border border-white/10 inline-block">
-                                <p className="font-mono text-blue-300">privacy@snappgame.com</p>
+                                <p className="font-mono text-blue-300">saxena.aman5@gmail.com</p>
                             </div>
                         </section>
                     </div>
