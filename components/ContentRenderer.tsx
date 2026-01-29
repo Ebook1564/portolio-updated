@@ -40,13 +40,14 @@ export default function ContentRenderer({ content, className = '' }: ContentRend
                     key={index} 
                     className="text-lg text-slate-700 mb-12 space-y-3 pl-8 [&_a]:text-blue-600 [&_a]:hover:text-blue-500 [&_a]:font-semibold [&_a]:underline [&_a]:hover:no-underline"
                   >
-                    {block.items.map((item, i) => (
-                      <li 
-                        key={i} 
-                        className="leading-relaxed group" 
-                        dangerouslySetInnerHTML={{ __html: item }}
-                      />
-                    ))}
+                    {block.items?.map((item, i) => (  // ✅ Safe: returns undefined if items is undefined
+  <li
+    key={i}
+    className="leading-relaxed group"
+  >
+    {item}
+  </li>
+))}
                   </ListTag>
                 )  
               case 'header':

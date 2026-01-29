@@ -252,20 +252,17 @@ export default function BlogPostPage() {
                                         remarkPlugins={[remarkGfm]}
                                         rehypePlugins={[rehypeRaw]}
                                         components={{
-                                            code({ node, inline, className, children, ...props }) {
-                                                const match = /language-(\w+)/.exec(className || '')
-                                                return !inline ? (
-                                                    <pre className="bg-slate-900 text-white p-6 rounded-2xl mt-8 mb-8 overflow-x-auto">
-                                                        <code className={`language-${match?.[1]} ${className}`} {...props}>
-                                                            {children}
-                                                        </code>
-                                                    </pre>
-                                                ) : (
-                                                    <code className={className} {...props}>
-                                                        {children}
-                                                    </code>
-                                                )
-                                            }
+                                            code({ node, className, children, ...props }: any) {
+  const match = /language-(\w+)/.exec(className || '')
+  return (
+    <pre className="bg-slate-900 text-white p-6 rounded-2xl mt-8 mb-8 overflow-x-auto">
+      <code className={className} {...props}>
+        {children}
+      </code>
+    </pre>
+  )
+}
+
                                         }}
                                     >
                                         {post.content}

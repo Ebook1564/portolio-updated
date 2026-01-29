@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Dialog } from "@headlessui/react"
 import { X } from "lucide-react"
-import { cn } from "@/lib/db"
+import { cn } from "@/lib/utils"
 
 export interface ModalProps {
   isOpen: boolean
