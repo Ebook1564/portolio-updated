@@ -234,7 +234,7 @@ export default function BlogPostPage() {
                                             <MessageSquare className="w-6 h-6 text-blue-600" />
                                         </div>
                                         <p className="text-xl md:text-2xl font-medium text-blue-900 leading-relaxed italic">
-                                            "{post.excerpt}"
+                                            {`"${post.excerpt}"`}
                                         </p>
                                     </div>
                                     <div className="absolute -bottom-10 -right-10 opacity-[0.05] group-hover:scale-110 transition-transform duration-700">
