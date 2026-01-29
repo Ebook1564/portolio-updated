@@ -85,7 +85,7 @@ export default function Home() {
               gradient="from-blue-500 to-indigo-600"
             />
 
-            {/* Tutorials Carousel */}
+            {/* Tips and Tricks Carousel */}
             <CarouselSection 
               title="Tips and Tricks" 
               subtitle="Curated timesavers"
@@ -203,7 +203,7 @@ function Carousel({ items, gradient }: { items: any[], gradient: string }) {
     // Dynamic routing based on item type
     if (item.topic) return `/news/${item.id}`        // DevLogs
     if (item.difficulty === "Beginner" || item.difficulty === "Intermediate" || item.difficulty === "Advanced" || item.difficulty === "Expert") {
-      return item.category?.toLowerCase().includes('unity') ? `/guides/${item.id}` : `/guides/${item.id}`
+      return item.category?.toLowerCase().includes('sysadmin tools',) ? `/tips-and-tricks/${item.id}` : `/guides/${item.id}`
     }
     return `/blog/${item.id}`                         // Blog posts
   }
