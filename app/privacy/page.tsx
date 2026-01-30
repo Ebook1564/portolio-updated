@@ -147,7 +147,7 @@ export default function PrivacyPage() {
                                     <div>
                                         <h2 className="text-2xl font-bold mb-4">4. Our Promise</h2>
                                         <p className="text-slate-400 leading-relaxed">
-                                            Across all our content—Guides, News, and Tips—we maintain a strict policy of non-collection. We are here to provide information, not to gather it.
+                                            Across all our content; Guides, News, and Tips, we maintain a strict policy of non-collection. We are here to provide information, not to gather it.
                                         </p>
                                     </div>
                                 </div>
