@@ -17,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-6157121429363510" />
+      </head>
       <body className={inter.className}>
         {children}
       </body>
