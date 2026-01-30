@@ -56,7 +56,7 @@ export default function TermsPage() {
                                         <ul className="space-y-3">
                                             <li className="flex items-start gap-3 text-slate-300">
                                                 <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
-                                                <span><strong>Optimization Solutions:</strong> providing techniques to improve performance in HTML5 and Unity games.</span>
+                                                <span><strong>Optimization Solutions:</strong> providing techniques to improve productivity and workflow in Unity games and general software development.</span>
                                             </li>
                                             <li className="flex items-start gap-3 text-slate-300">
                                                 <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
