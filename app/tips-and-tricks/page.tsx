@@ -71,7 +71,7 @@ export default function TipsTricksPage() {
                                 transition={{ delay: 0.1 }}
                                 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight"
                             >
-                                Simplify the
+                                Ease off the
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400"> complications</span>
                             </motion.h1>
 
