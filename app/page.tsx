@@ -53,7 +53,7 @@ export default function Home() {
               </h1>
 
               <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-                Deep technical guides, Unity optimization patterns, and architecture breakdowns for serious developers.
+                Deep technical guides, Unity optimization techniques, and architecture breakdowns for aspiring developers.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -80,7 +80,7 @@ export default function Home() {
             id="featured-guides"
             variant="light"
             title="Featured Guides"
-            subtitle="Master Unity & WebGL Architecture"
+            subtitle="Master Unity Engine and System Architecture"
             href="/guides"
             items={gameDevGuides.slice(0, 8)}
             icon={Layers}
@@ -90,7 +90,7 @@ export default function Home() {
           <CarouselSection
             variant="dark"
             title="Tips & Tricks"
-            subtitle="Performance Hacks & Snippets"
+            subtitle="Curated Timesavers and Performance Hacks"
             href="/tips-and-tricks"
             items={tutorials.slice(0, 8)}
             icon={Zap}
