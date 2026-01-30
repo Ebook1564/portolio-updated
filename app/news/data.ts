@@ -60,17 +60,17 @@ export const devLogs: GameDevLog[] = [
     codeSnippet: "NDA → WhatsApp → Leak → Takedown"
   },
   
-  keyTakeaway: "Contractors under NDA lose 3+ years of work with no public credit when projects cancel.",
+  keyTakeaway: "Contractors under NDA lose years of work with no public credit when projects cancel.",
   
   content: [
     { type: 'header', level: 2, text: "3 Years Disappears in Silence" },
     
     { type: 'paragraph', text: "Eman Ayaz believed she was Farah Farah, Prince of Persia's iconic companion, for what Ayaz has described the role as the most emotionally invested performance of her career. For nearly three years, she recorded dialogue, performed motion capture, and worked closely with the development team under strict non-disclosure agreements. When news of the cancellation emerged, it did not arrive via Ubisoft HR or production staff—but through informal messages passed between acquaintances, leaving her without closure or explanation." },
-    { type: 'paragraph', text: "Prince of Persia: The Sands of Time originally released in 2003 and became one of Ubisoft’s best-known action-adventure games, making a modern remake a high-expectation project for longtime fans. Development for the sequel seemed to have been progressing sluggishly since the initial announcement in 2020, having been halted and restarted altogether in 2023. Ubisoft Montreal was asked to take charge over the project after it being withdrawn from Ubisoft Pune and Ubisoft Mumbai divisions. The calling off of the remake now puts a significant blow to the franchise's fall from grace, with mediocre releases spanning the last decade." },
+    { type: 'paragraph', text: "Prince of Persia: The Sands of Time originally released in 2003 and became one of Ubisoft’s best-known action-adventure games, making a modern remake a high-expectation project for longtime fans. Development for the sequel seemed to have been progressing sluggishly since the initial announcement in 2020, having been halted and restarted altogether in 2023. Ubisoft Montreal was asked to take charge over the project after it being withdrawn from Ubisoft Pune and Ubisoft Mumbai divisions. The calling off of the remake now puts a significant blow to the franchise, cementing its fall from grace, with mediocre releases spanning the last decade." },
     
     { type: 'alert', variant: 'warning', title: "NDA Blackout", text: "Bound by non-disclosure agreement, Ayaz cannot name the project directly. Her grief compounds knowing the performance may never see daylight." },
     
-    { type: 'paragraph', text: "Bound by non-disclosure agreement, Ayaz cannot name the project directly but has uploaded a video mentioning how the journey has been for her, helping her, in her own words, let her go beyond her own limits. Her grief compounds knowing the performance may never see daylight. Unless a publisher reuses assets in another project, recordings often remain unreleased and inaccessible to the public because they are owned by the publisher and may be covered by NDAs and contracts" },
+    { type: 'paragraph', text: "Bound by non-disclosure agreement, Ayaz cannot name the project directly but has uploaded a video mentioning how the journey has been for her, helping her, in her own words, let her go beyond her own limits. Unless a publisher reuses assets in another project, recordings often remain unreleased and inaccessible to the public because they are owned by the publisher and may be covered by NDAs and contracts. Her grief compounds knowing the performance may never see daylight." },
     
     { type: 'header', level: 2, text: "Leaked Internal Build" },
     
@@ -105,7 +105,7 @@ export const devLogs: GameDevLog[] = [
     
     { type: 'quote', text: "'I gave my best performance and it may never be seen.'", author: "Eman Ayaz" },
     
-    { type: 'header', level: 2, text: "Industry Pattern Recognition" },
+    { type: 'header', level: 3, text: "Industry Pattern Recognition" },
     
     { type: 'list', style: 'unordered', items: [
       "Ubisoft's broader cancellation trend (Ghost Recon, others)",
@@ -119,7 +119,7 @@ export const devLogs: GameDevLog[] = [
     { type: 'header', level: 2, text:"The Bigger Picture" },
     
     { type: 'paragraph', text: "This may just be one of the first of many dominoes to fall as Ubisoft has announced a company “reset” that includes closing two studios and cancelling six games, including the Sands of Time Remake alongside five other unnamed IPs. The news pushed the company's share price down 34% to its lowest level in 15 years. Separate reporting and commentary framed the move as a reorganisation into different creative groups aimed at focusing on fewer, established series . Rumors circulating via a Google News roundup also suggest Ubisoft may have ended or paused development on its Watch Dogs franchise, though these claims are presented as reports from outlets citing “insiders” rather than a formal company statement in the provided links" },
-    { type: 'paragraph', text: "Sands of Time, alongside 5 other unnamed IPs remake joins Ghost Recon Frontline in Ubisoft's cancellation graveyard, amid restructuring, shifting live-service priorities, and rising development costs. The leaked demo, now memory-holed, served as unintended postmortem for a promising revival that never shipped. For contractors, the consequences are uniquely severe: cancelled projects cannot be discussed, credited, or even referenced in portfolios, creating unexplained gaps in professional histories." },
+    { type: 'paragraph', text: "The Sands of Time remake, alongside 5 other unnamed IPs joins Ghost Recon Frontline in Ubisoft's cancellation graveyard, amid restructuring, shifting live-service priorities, and rising development costs. The leaked demo, now memory-holed, served as unintended postmortem for a promising revival that never shipped. For contractors, the consequences are uniquely severe: cancelled projects cannot be discussed, credited, or even referenced in portfolios, creating unexplained gaps in professional histories." },
     
     { type: 'grid', items: [
       {

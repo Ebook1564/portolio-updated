@@ -37,6 +37,7 @@ export const gameDevGuides: GuideData[] = [
         author: "Prashant Saxena",
         readTime: "5 min",
         difficulty: "Beginner",
+      
         icon: Gamepad2,
         stats: "Improve Workflow",
         //   image: "/images/mouse-without-borders-hero.jpg",
@@ -51,7 +52,7 @@ export const gameDevGuides: GuideData[] = [
             { type: 'header', level: 2, text: "Setting up Mouse Without Borders on your devices" },
             
             { type: 'list', style: 'ordered', items: [
-                "Install PowerToys via [GitHub](https://github.com/microsoft/PowerToys/releases) or [Microsoft Store](https://www.microsoft.com/store/productId/9N8M4H02LCRM)",
+                "Install PowerToys via [GitHub](https://github.com/microsoft/PowerToys/releases) or [Microsoft Store](https://aka.ms/getPowertoys)",
                 "On your Primary Machine, open PowerToys. In the utilities section, navigate to Mouse Without Borders and enable it. In the Activation section at the top, you'll see a Security Key followed by your machine's hostname. Take note of both of these values.",
                 "On you Secondary device(s), navigate to Mouse without Borders and click inside Security Key textbox. This will expand the TextBox and allow you to input the Security Key from and the name of the Primary Machine.",
                 "In the device layout section, you can drag the on-screen PC icons to match your physical monitor layout"

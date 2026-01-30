@@ -9,6 +9,23 @@ import { Search, Sparkles, Clock } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 
+// Small helper to convert inline markdown links and inline code to HTML
+function convertMarkdownToHtml(text: string | undefined) {
+    if (!text) return ''
+    if (typeof document === 'undefined') return text
+    const div = document.createElement('div')
+    div.textContent = text
+    let html = div.innerHTML
+
+    html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|mailto:[^)\s]+)\)/g, (m, label, url) => {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-500 font-semibold underline">${label}</a>`
+    })
+
+    html = html.replace(/`([^`]+)`/g, (m, code) => `<code class="font-mono bg-slate-100 px-1 rounded text-sm">${code}</code>`)
+
+    return html
+}
+
 export default function TipsTricksPage() {
     const [activeCategory, setActiveCategory] = useState("All")
     const categories = ["All", ...Array.from(new Set(tutorials.map(t => t.category)))]
@@ -156,9 +173,7 @@ export default function TipsTricksPage() {
                                                     {tutorial.title}
                                                 </h3>
 
-                                                <p className="text-slate-500 text-[15px] font-medium leading-relaxed mb-10 line-clamp-3">
-                                                    {tutorial.excerpt}
-                                                </p>
+                                                <p className="text-slate-500 text-[15px] font-medium leading-relaxed mb-10 line-clamp-3" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(tutorial.excerpt) }} />
 
                                                 {/* Tech Stats Footer */}
                                                 <div className="mt-auto pt-8 border-t border-slate-100 flex items-center justify-between">

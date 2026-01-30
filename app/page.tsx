@@ -3,144 +3,139 @@
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { BookOpen, Code, Newspaper, PlayCircle, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { BookOpen, Code2, Newspaper, ArrowRight, ChevronLeft, ChevronRight, Zap, Layers, Calendar, Clock, User, Tag, BarChart3 } from "lucide-react"
 import { motion } from "framer-motion"
+import { useRef } from "react"
 
-// Import your data
+// Import data
 import { gameDevGuides } from "@/app/guides/data"
-import { tutorials } from "@/app/tips-and-tricks/data" 
+import { tutorials } from "@/app/tips-and-tricks/data"
 import { devLogs } from "@/app/news/data"
-import { blogPosts } from "@/app/blog/data" // assuming this exists
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
-}
+import { blogPosts } from "@/app/blog/data"
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#020617] text-white selection:bg-blue-500/30">
       <Header />
+
       <main className="flex-1">
-        {/* Hero Section - Simplified */}
-        <section className="relative pt-28 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-slate-900 via-blue-900/20 to-slate-900 text-white overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,#3b82f6_0%,transparent_50%),radial-gradient(circle_at_80%_20%,#9333ea_0%,transparent_50%)]"></div>
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <motion.div 
-              className="max-w-4xl mx-auto text-center"
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
-            >
-              <motion.h1 
-                className="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight"
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              >
-                Developer Resources Hub
-              </motion.h1>
-              
-              <motion.p 
-                className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl mx-auto"
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              >
-                Guides, tutorials, devlogs, and technical deep dives for game development and Windows productivity
-              </motion.p>
+        {/* Hero Section - STRICTLY DARK */}
+        <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-[#020617]">
+          {/* Background Effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-900/10 via-[#020617] to-[#020617]" />
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]" />
+          </div>
 
-              <motion.div 
-                className="flex flex-col sm:flex-row gap-6 justify-center"
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+          <div className="container mx-auto px-6 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-5xl mx-auto text-center"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm font-bold uppercase tracking-widest mb-8 backdrop-blur-sm"
               >
-                <Link href="/guides">
-                  <Button size="lg" className="text-xl px-12 py-8 rounded-full font-black bg-blue-600 hover:bg-blue-700 shadow-2xl">
-                    <BookOpen className="w-6 h-6 mr-2" />
-                    Browse Guides
-                  </Button>
-                </Link>
-                <Link href="/news">
-                  <Button size="lg" variant="outline" className="text-xl px-12 py-8 rounded-full font-black border-white text-black hover:bg-white hover:text-slate-900">
-                    News Articles
-                  </Button>
-                </Link>
+                <Zap className="w-4 h-4" />
+                <span>The Engineer's Hub</span>
               </motion.div>
-            </motion.div>
-          </div>
-        </section>
 
-        {/* 4 Content Carousels */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-4 space-y-24">
-            
-            {/* Guides Carousel */}
-            <CarouselSection 
-              title="Featured Guides" 
-              subtitle="Practical Windows & Game Dev tutorials"
-              href="/guides"
-              items={gameDevGuides.slice(0, 8)}
-              icon={BookOpen}
-              gradient="from-blue-500 to-indigo-600"
-            />
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight text-white">
+                Build Better <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+                  Game Systems
+                </span>
+              </h1>
 
-            {/* Tips and Tricks Carousel */}
-            <CarouselSection 
-              title="Tips and Tricks" 
-              subtitle="Curated timesavers"
-              href="/tips-and-tricks"
-              items={tutorials.slice(0, 8)}
-              icon={Code}
-              gradient="from-emerald-500 to-teal-600"
-            />
-
-            {/* Dev Logs Carousel */}
-            <CarouselSection 
-              title="News Articles" 
-              subtitle="Real-world problem solving stories"
-              href="/news"
-              items={devLogs.slice(0, 8)}
-              icon={Newspaper}
-              gradient="from-purple-500 to-pink-600"
-            />
-
-            {/* Blog Posts Carousel */}
-            <CarouselSection 
-              title="Technical Blog" 
-              subtitle="Deep dives and industry analysis"
-              href="/blog"
-              items={blogPosts.slice(0, 8)}
-              icon={PlayCircle}
-              gradient="from-orange-500 to-red-600"
-            />
-
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-24 bg-gradient-to-br from-slate-900 to-blue-900/20 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                Ready to Build Something Great?
-              </h2>
-              <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl mx-auto">
-                Dive into hundreds of technical guides and tutorials
+              <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Deep technical guides, Unity optimization patterns, and architecture breakdowns for serious developers.
               </p>
+
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link href="/guides">
-                  <Button size="lg" className="text-xl px-12 py-8 rounded-full font-black bg-white text-slate-900 hover:bg-slate-50 shadow-2xl">
-                    <BookOpen className="w-6 h-6 mr-2" />
-                    All Guides
-                  </Button>
+                  <button className="px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-black text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <BookOpen className="w-5 h-5" />
+                    Browse Guides
+                  </button>
+                </Link>
+                <Link href="/news">
+                  <button className="px-10 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-black text-lg hover:bg-white/10 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <Newspaper className="w-5 h-5" />
+                    Latest News
+                  </button>
                 </Link>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Content Carousels - ALTERNATING */}
+        <div className="flex flex-col">
+          <CarouselSection
+            id="featured-guides"
+            variant="light"
+            title="Featured Guides"
+            subtitle="Master Unity & WebGL Architecture"
+            href="/guides"
+            items={gameDevGuides.slice(0, 8)}
+            icon={Layers}
+            accentColor="blue"
+          />
+
+          <CarouselSection
+            variant="dark"
+            title="Tips & Tricks"
+            subtitle="Performance Hacks & Snippets"
+            href="/tips-and-tricks"
+            items={tutorials.slice(0, 8)}
+            icon={Zap}
+            accentColor="yellow"
+          />
+
+          <CarouselSection
+            variant="light"
+            title="Industry News"
+            subtitle="Updates from the Game Dev World"
+            href="/news"
+            items={devLogs.slice(0, 8)}
+            icon={Newspaper}
+            accentColor="purple"
+          />
+
+          <CarouselSection
+            variant="dark"
+            title="Engineering Blog"
+            subtitle="Deep Dives & Case Studies"
+            href="/blog"
+            items={blogPosts.slice(0, 8)}
+            icon={Code2}
+            accentColor="green"
+          />
+        </div>
+
+        {/* Final CTA - LIGHT (to contrast with previous Dark section) */}
+        <section className="py-32 relative overflow-hidden bg-white">
+          <div className="absolute inset-0 bg-blue-50/50 pointer-events-none" />
+          <div className="container mx-auto px-6 relative z-10 text-center">
+            <div className="max-w-3xl mx-auto p-12 rounded-[3rem] bg-white border border-slate-200 shadow-2xl backdrop-blur-md">
+              <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900">
+                Ready to Optimize?
+              </h2>
+              <p className="text-xl text-slate-600 mb-10">
+                Join thousands of developers building faster, cleaner, and more scalable games.
+              </p>
+              <Link href="/guides">
+                <button className="px-12 py-5 bg-slate-900 text-white rounded-2xl font-black text-lg hover:bg-slate-800 transition-all transform hover:-translate-y-1 active:scale-95 inline-flex items-center gap-2 shadow-xl">
+                  Start Reading
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
@@ -149,139 +144,269 @@ export default function Home() {
   )
 }
 
-// Reusable Carousel Section Component
-function CarouselSection({ 
-  title, 
-  subtitle, 
-  href, 
-  items, 
-  icon: Icon, 
-  gradient 
+// Reusable Components WITH VARIANTS
+
+function CarouselSection({
+  id,
+  variant,
+  title,
+  subtitle,
+  href,
+  items,
+  icon: Icon,
+  accentColor
 }: {
+  id?: string
+  variant: 'light' | 'dark'
   title: string
   subtitle: string
   href: string
   items: any[]
   icon: any
-  gradient: string
+  accentColor: 'blue' | 'purple' | 'green' | 'yellow'
 }) {
+  const isDark = variant === 'dark'
+
+  const colorStyles = {
+    blue: isDark ? "text-blue-400 bg-blue-500/10 border-blue-500/20" : "text-blue-600 bg-blue-50 border-blue-200",
+    purple: isDark ? "text-purple-400 bg-purple-500/10 border-purple-500/20" : "text-purple-600 bg-purple-50 border-purple-200",
+    green: isDark ? "text-green-400 bg-green-500/10 border-green-500/20" : "text-green-600 bg-green-50 border-green-200",
+    yellow: isDark ? "text-yellow-400 bg-yellow-500/10 border-yellow-500/20" : "text-yellow-600 bg-yellow-50 border-yellow-200",
+  }
+
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="w-full"
-    >
-      <div className="flex justify-between items-center mb-12">
+    <section id={id} className={`relative py-24 ${isDark ? 'bg-[#0B1120]' : 'bg-slate-50'}`}>
+      {/* Decorative Background for Dark Sections */}
+      {isDark && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className={`absolute top-0 right-0 w-[500px] h-[500px] opacity-10 rounded-full blur-[100px] bg-${accentColor}-500`} />
+        </div>
+      )}
+
+      <div className="container mx-auto px-6 mb-12 flex flex-col md:flex-row justify-between items-end gap-6 relative z-10">
         <div>
-          <div className="inline-flex items-center gap-3 px-4 py-2 mb-4 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent">
-            <Icon className="w-5 h-5" />
-            <span className="font-bold text-sm uppercase tracking-wide">{title}</span>
+          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-wider mb-4 ${colorStyles[accentColor]}`}>
+            <Icon className="w-3.5 h-3.5" />
+            <span>{title}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-gray-900 to-slate-700 bg-clip-text text-transparent">
+          <h2 className={`text-3xl md:text-5xl font-black mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             {title}
           </h2>
-          <p className="text-xl text-slate-600">{subtitle}</p>
+          <p className={`text-lg ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{subtitle}</p>
         </div>
-        <Link 
+
+        <Link
           href={href}
-          className="group flex items-center gap-2 text-lg font-bold text-blue-600 hover:text-blue-700"
+          className={`hidden md:flex items-center gap-2 text-sm font-black transition-all duration-300 group px-6 py-3 rounded-xl border ${isDark
+            ? "text-white bg-white/5 border-white/10 hover:bg-blue-500 hover:text-white shadow-lg"
+            : "text-slate-700 bg-white border-slate-200 hover:bg-blue-500 hover:text-white shadow-sm"
+            }`}
         >
           View All
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
 
-      <Carousel items={items} gradient={gradient} />
-    </motion.section>
+      <Carousel items={items} isDark={isDark} sectionIcon={Icon} accentColor={accentColor} />
+
+      <div className="container mx-auto px-6 mt-8 md:hidden relative z-10">
+        <Link
+          href={href}
+          className={`flex items-center justify-center gap-2 text-sm font-black w-full py-4 rounded-xl border transition-all duration-300 group ${isDark
+            ? "text-white bg-white/5 border-white/10 hover:bg-blue-500 hover:text-white shadow-lg"
+            : "text-slate-700 bg-white border-slate-200 hover:bg-blue-500 hover:text-white shadow-sm"
+            }`}
+        >
+          View All {title}
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Link>
+      </div>
+    </section>
   )
 }
 
-// Horizontal Scrollable Carousel Component
-function Carousel({ items, gradient }: { items: any[], gradient: string }) {
+function Carousel({ items, isDark, sectionIcon: Icon, accentColor }: { items: any[], isDark: boolean, sectionIcon: any, accentColor: string }) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 400
+      const newScrollLeft = direction === 'left'
+        ? scrollContainerRef.current.scrollLeft - scrollAmount
+        : scrollContainerRef.current.scrollLeft + scrollAmount
+
+      scrollContainerRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   const getItemPath = (item: any) => {
-    // Dynamic routing based on item type
     if (item.topic) return `/news/${item.id}`        // DevLogs
     if (item.difficulty === "Beginner" || item.difficulty === "Intermediate" || item.difficulty === "Advanced" || item.difficulty === "Expert") {
-      return item.category?.toLowerCase().includes('sysadmin tools',) ? `/tips-and-tricks/${item.id}` : `/guides/${item.id}`
+      return item.category?.toLowerCase().includes("sysadmin tools") ? `/tips-and-tricks/${item.id}` : `/guides/${item.id}`
     }
     return `/blog/${item.id}`                         // Blog posts
   }
 
+  const getGlowColor = () => {
+    switch (accentColor) {
+      case 'blue': return 'group-hover:shadow-blue-500/20'
+      case 'purple': return 'group-hover:shadow-purple-500/20'
+      case 'green': return 'group-hover:shadow-green-500/20'
+      case 'yellow': return 'group-hover:shadow-yellow-500/20'
+      default: return 'group-hover:shadow-blue-500/20'
+    }
+  }
+
+  const getIconColor = () => {
+    switch (accentColor) {
+      case 'blue': return 'text-blue-500'
+      case 'purple': return 'text-purple-500'
+      case 'green': return 'text-green-500'
+      case 'yellow': return 'text-yellow-500'
+      default: return 'text-blue-500'
+    }
+  }
+
   return (
-    <div className="relative">
-      {/* Navigation Arrows */}
-      <button className="absolute -left-12 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110">
-        <ChevronLeft className="w-6 h-6 text-slate-700" />
+    <div className="relative group/carousel">
+      {/* Scroll Buttons */}
+      <button
+        onClick={() => scroll('left')}
+        className={`absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 backdrop-blur-xl border rounded-full flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all hover:scale-110 shadow-lg disabled:opacity-0 hidden md:flex ${isDark
+          ? "bg-[#0B1120]/80 border-white/10 text-white"
+          : "bg-white/90 border-slate-200 text-slate-700"
+          }`}
+      >
+        <ChevronLeft className="w-6 h-6" />
       </button>
-      <button className="absolute -right-12 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110">
-        <ChevronRight className="w-6 h-6 text-slate-700" />
+      <button
+        onClick={() => scroll('right')}
+        className={`absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 backdrop-blur-xl border rounded-full flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all hover:scale-110 shadow-lg hidden md:flex ${isDark
+          ? "bg-[#0B1120]/80 border-white/10 text-white"
+          : "bg-white/90 border-slate-200 text-slate-700"
+          }`}
+      >
+        <ChevronRight className="w-6 h-6" />
       </button>
 
-      {/* Scrollable Container */}
-      <div className="flex gap-6 overflow-x-auto pb-8 scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-slate-100 snap-x snap-mandatory">
+      {/* Track */}
+      <div
+        ref={scrollContainerRef}
+        className="flex gap-6 overflow-x-auto px-6 md:px-[calc((100vw-1280px)/2+24px)] scrollbar-none snap-x snap-mandatory"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
         {items.map((item, index) => (
           <motion.div
             key={item.id}
-            className="flex-shrink-0 w-80 h-96 cursor-pointer"
-            whileHover={{ y: -8 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ delay: index * 0.05 }}
+            className="flex-shrink-0 w-[300px] md:w-[380px] snap-center group"
           >
-            {/* ENTIRE CARD WRAPPED IN Link */}
-            <Link href={getItemPath(item)} className="block w-full h-full group">
-              <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl shadow-2xl overflow-hidden snap-center hover:shadow-3xl transition-all duration-300 border border-slate-200 h-full">
-                
-                {/* Card Image/Gradient */}
-                <div 
-                  className={`h-48 bg-gradient-to-r ${gradient} relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500`}
-                >
-                  {item.image && (
-                    <img 
-                      src={item.image} 
+            <Link href={getItemPath(item)} className="block h-full">
+              <div className={`h-full rounded-[2rem] border overflow-hidden transition-all duration-500 flex flex-col ${isDark
+                ? `bg-[#020617] border-white/10 hover:border-blue-500/50 hover:shadow-2xl ${getGlowColor()} shadow-lg`
+                : `bg-white border-slate-200 hover:border-blue-400 hover:shadow-2xl ${getGlowColor()} shadow-sm`
+                }`}>
+                {/* Image Area */}
+                <div className={`h-56 relative overflow-hidden ${isDark ? "bg-white/5" : "bg-slate-100"}`}>
+                  {item.image ? (
+                    <img
+                      src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover opacity-20 absolute inset-0"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
                     />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className={`w-20 h-20 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform ${isDark ? "bg-white/5" : "bg-white shadow-sm"}`}>
+                        <Icon className={`w-10 h-10 ${isDark ? "text-white/20" : "text-slate-300"}`} />
+                      </div>
+                    </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold text-white">
-                      {item.category || item.topic}
+
+                  {/* Floating Icon Overlay */}
+                  <div className="absolute top-6 left-6 z-10">
+                    <div className={`w-12 h-12 rounded-2xl backdrop-blur-md border flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-110 ${isDark
+                      ? "bg-[#020617]/40 border-white/10"
+                      : "bg-white/60 border-slate-200"
+                      }`}>
+                      <Icon className={`w-6 h-6 ${getIconColor()}`} />
+                    </div>
+                  </div>
+
+                  <div className="absolute top-6 right-6">
+                    <span className={`px-3 py-1.5 backdrop-blur-md rounded-xl text-[10px] font-black uppercase tracking-tighter border shadow-sm flex items-center gap-1.5 ${isDark
+                      ? "bg-[#020617]/80 text-white border-white/10"
+                      : "bg-white/90 text-slate-900 border-slate-200"
+                      }`}>
+                      <Tag className={`w-3 h-3 ${getIconColor()}`} />
+                      {item.category || item.topic || "Article"}
                     </span>
                   </div>
+
+                  {/* Gradient Overlay for better text contrast */}
+                  <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-[#020617] via-transparent to-transparent' : 'from-white/20 via-transparent to-transparent'}`} />
                 </div>
 
-                {/* Card Content */}
-                <div className="p-8">
-                  <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
-                    <span>{item.date}</span>
-                    <span>•</span>
-                    <span>{item.readTime || `${item.difficulty || 'Guide'} • ${Math.floor(Math.random()*10)+1} min`}</span>
+                {/* Content Area */}
+                <div className="p-8 flex-1 flex flex-col">
+                  <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-bold mb-4">
+                    <div className={`flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                      <Calendar className={`w-3.5 h-3.5 ${getIconColor()}`} />
+                      <span>{item.date}</span>
+                    </div>
+                    <div className={`flex items-center gap-1.5 ${isDark ? "text-slate-500 text-[10px] uppercase tracking-wider" : "text-slate-400 text-[10px] uppercase tracking-wider"}`}>
+                      <Clock className={`w-3.5 h-3.5 ${getIconColor()} opacity-70`} />
+                      <span>{item.readTime || "5 min read"}</span>
+                    </div>
+                    {item.author && (
+                      <div className={`flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                        <User className={`w-3.5 h-3.5 ${getIconColor()}`} />
+                        <span>{item.author}</span>
+                      </div>
+                    )}
+                    {item.difficulty && (
+                      <div className={`flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                        <BarChart3 className={`w-3.5 h-3.5 ${getIconColor()}`} />
+                        <span>{item.difficulty}</span>
+                      </div>
+                    )}
                   </div>
-                  
-                  <h3 className="font-black text-xl mb-4 leading-tight line-clamp-2 text-slate-900 group-hover:text-blue-600 transition-colors duration-300">
+
+                  <h3 className={`text-xl md:text-2xl font-black mb-4 leading-tight transition-colors line-clamp-2 ${isDark
+                    ? "text-white group-hover:text-blue-400"
+                    : "text-slate-900 group-hover:text-blue-600"
+                    }`}>
                     {item.title}
                   </h3>
-                  
-                  <p className="text-slate-600 text-sm mb-6 line-clamp-3 leading-relaxed">
+
+                  <p className={`text-sm md:text-base leading-relaxed line-clamp-3 mb-8 flex-1 ${isDark ? "text-slate-400/80" : "text-slate-600"
+                    }`}>
                     {item.excerpt}
                   </p>
-                  
-                  <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <span className="text-slate-500 text-sm font-semibold">
-                      {item.author}
-                    </span>
-                    <ArrowRight className="w-4 h-4 text-blue-600 translate-x-0 group-hover:translate-x-2 transition-transform duration-300" />
+
+                  <div className={`flex items-center justify-between pt-6 border-t ${isDark ? 'border-white/5' : 'border-slate-100'}`}>
+                    <div className={`flex items-center gap-2 text-sm font-bold transition-all group-hover:translate-x-1 ${isDark ? "text-white" : "text-slate-900"
+                      }`}>
+                      Read Deep Dive
+                      <ArrowRight className={`w-4 h-4 ${getIconColor()}`} />
+                    </div>
+                    <div className={`p-2 rounded-lg bg-slate-50 dark:bg-white/5 transition-colors group-hover:bg-${accentColor}-500/10`}>
+                      <Icon className={`w-4 h-4 ${getIconColor()} opacity-50 group-hover:opacity-100`} />
+                    </div>
                   </div>
                 </div>
               </div>
             </Link>
           </motion.div>
         ))}
+        {/* Spacer for end of carousel */}
+        <div className="w-12 shrink-0" />
       </div>
     </div>
   )
 }
-

@@ -121,7 +121,7 @@ export default function NewsPage() {
                         <div className="relative z-10">
                           <div className="flex items-center gap-2 mb-3">
                             <Bug className="w-4 h-4 text-red-400" />
-                            <span className="text-[10px] font-black text-blue-300 tracking-[0.2em] uppercase">The Challenge</span>
+                            <span className="text-[10px] font-black text-blue-300 tracking-[0.2em] uppercase">The Issue at hand</span>
                           </div>
                           <p className="text-base text-slate-300 italic opacity-80 leading-relaxed">
                             "{featuredLog.challenge.description}"

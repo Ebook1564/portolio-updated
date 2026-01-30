@@ -81,7 +81,7 @@ To solve this, I introduced **Locked Groups**.
 
 Each group:
 
-* Has a *base layer* (index \`0\`)
+* Has a *base layer* (index 0)
 * Stores the **initial Y-offsets** of all other layers relative to that base
 * Moves together while preserving spacing
 
@@ -95,7 +95,7 @@ public class LockedGroup
 }
 \`\`\`
 
-#### Initialization (Start)
+### Initialization (Start)
 
 At runtime, the script captures the original vertical spacing between layers:
 
@@ -125,7 +125,7 @@ Meanwhile, **non-grouped layers** are handled separately and move freely, allowi
 
 ---
 
-## 📐 ScaleToCamera.cs — Resolution-Independent Backgrounds
+### 📐 ScaleToCamera.cs: Resolution-Independent Backgrounds
 
 Parallax depth only works if the background **fills the screen correctly**. Different aspect ratios can easily break the illusion by exposing edges or stretching sprites.
 
@@ -139,7 +139,7 @@ This script ensures each background layer:
 * Works consistently across resolutions
 * Supports different scaling behaviors depending on art style
 
-It runs in \`LateUpdate\` and uses \`[ExecuteAlways]\`, meaning:
+It runs in LateUpdate and uses ExecuteAlways, meaning:
 
 * Scaling updates in both Play Mode and Edit Mode
 * Visual layout can be previewed instantly in the editor
@@ -177,7 +177,7 @@ This flexibility lets each parallax layer behave differently if needed.
 
 ---
 
-## 🤝 How the Two Scripts Work Together
+### 🤝 How the Two Scripts Work Together
 
 The real power of the system comes from **separation of concerns**:
 
@@ -222,7 +222,7 @@ It’s modular, inspector-driven, and easy to extend — whether for looping bac
         category: "Gaming Trends",
         readTime: "10 min read",
         author: "Alex Rivera",
-        image: "from-blue-500 to-indigo-600"
+        image: "/images/parallax-system.png"
     },
-    
+
 ];

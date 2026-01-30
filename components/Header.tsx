@@ -86,10 +86,10 @@ export function Header() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="/"
+                href="/about"
                 className="group flex items-center gap-2 px-6 py-2.5 bg-white text-[#020617] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-xl"
               >
-                Get Started
+                About Us
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </motion.div>
@@ -162,11 +162,11 @@ export function Header() {
                 className="pt-6"
               >
                 <Link
-                  href="/"
+                  href="/about"
                   onClick={() => setIsOpen(false)}
                   className="group flex items-center justify-center gap-2 w-full py-5 bg-blue-600 text-white rounded-[1.5rem] font-black uppercase tracking-[0.2em] text-center text-sm shadow-2xl shadow-blue-500/20 hover:bg-blue-500 transition-all active:scale-95"
                 >
-                  Get Started
+                  About Us
                   <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </motion.div>

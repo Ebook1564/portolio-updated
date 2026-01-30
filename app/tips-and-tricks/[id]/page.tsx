@@ -19,6 +19,23 @@ SyntaxHighlighter.registerLanguage('typescript', ts);
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('glsl', glsl);
 
+// Small helper to convert inline markdown links and inline code to HTML
+function convertMarkdownToHtml(text: string | undefined) {
+    if (!text) return ''
+    if (typeof document === 'undefined') return text
+    const div = document.createElement('div')
+    div.textContent = text
+    let html = div.innerHTML
+
+    html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|mailto:[^)\s]+)\)/g, (m, label, url) => {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-500 font-semibold underline">${label}</a>`
+    })
+
+    html = html.replace(/`([^`]+)`/g, (m, code) => `<code class="font-mono bg-slate-100 px-1 rounded text-sm">${code}</code>`)
+
+    return html
+}
+
 export default function TutorialDetailPage() {
     const params = useParams()
     const tutorial = tutorials.find(t => t.id.toString() === params.id)
@@ -210,13 +227,13 @@ function ContentBlockRenderer({ block, index }: { block: ContentBlock, index: nu
             return <Tag id={`section-${index}`} className={className}>{block.text}</Tag>;
 
         case 'paragraph':
-            return <p className="text-lg text-slate-600 leading-8 mb-6">{block.text}</p>;
+            return <p className="text-lg text-slate-600 leading-8 mb-6" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(block.text) }} />;
 
         case 'list':
             const ListTag = block.style === 'ordered' ? 'ol' : 'ul';
             return (
                 <ListTag className={`mb-8 pl-6 space-y-2 text-lg text-slate-700 marker:text-indigo-400 ${block.style === 'ordered' ? 'list-decimal' : 'list-disc'}`}>
-                    {block.items.map((item, i) => <li key={i}>{item}</li>)}
+                    {block.items.map((item, i) => <li key={i} className="pl-2" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(item) }} />)}
                 </ListTag>
             );
 
@@ -263,10 +280,10 @@ function ContentBlockRenderer({ block, index }: { block: ContentBlock, index: nu
                         </thead>
                         <tbody className="divide-y divide-slate-100">
                             {block.rows.map((row, i) => (
-                                <tr key={i} className="hover:bg-slate-50/50">
-                                    {row.map((cell, j) => <td key={j} className="p-4 text-slate-600">{cell}</td>)}
-                                </tr>
-                            ))}
+                                    <tr key={i} className="hover:bg-slate-50/50">
+                                        {row.map((cell, j) => <td key={j} className="p-4 text-slate-600" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(cell) }} />)}
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>
@@ -284,13 +301,13 @@ function ContentBlockRenderer({ block, index }: { block: ContentBlock, index: nu
             return (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     {block.items.map((item, i) => (
-                        <div key={i} className={`p-6 rounded-2xl border ${item.variant === 'good' ? 'bg-indigo-50 border-indigo-100' : 'bg-red-50 border-red-100'}`}>
-                            <h5 className={`font-black mb-4 ${item.variant === 'good' ? 'text-indigo-900' : 'text-red-900'}`}>{item.title}</h5>
-                            <ul className={`space-y-2 text-sm ${item.variant === 'good' ? 'text-indigo-800' : 'text-red-800'}`}>
-                                {item.list.map((li, j) => <li key={j} className="flex gap-2"><span>•</span> {li}</li>)}
-                            </ul>
-                        </div>
-                    ))}
+                                            <div key={i} className={`p-6 rounded-2xl border ${item.variant === 'good' ? 'bg-indigo-50 border-indigo-100' : 'bg-red-50 border-red-100'}`}>
+                                                <h5 className={`font-black mb-4 ${item.variant === 'good' ? 'text-indigo-900' : 'text-red-900'}`}>{item.title}</h5>
+                                                <ul className={`space-y-2 text-sm ${item.variant === 'good' ? 'text-indigo-800' : 'text-red-800'}`}>
+                                                    {item.list.map((li, j) => <li key={j} className="flex gap-2"><span>•</span> <span dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(li) }} /></li>)}
+                                                </ul>
+                                            </div>
+                                        ))}
                 </div>
             );
 

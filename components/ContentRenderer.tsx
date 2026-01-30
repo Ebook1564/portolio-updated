@@ -3,6 +3,27 @@
 import { Code, AlertCircle, Info, CheckCircle, Image as ImageIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+// Simple inline markdown -> HTML converter for links and inline code
+function convertMarkdownToHtml(text: string) {
+  if (!text) return ''
+
+  // Basic HTML-escape to reduce XSS risk for raw text
+  const div = typeof document !== 'undefined' ? document.createElement('div') : null
+  const escaped = div ? (div.textContent = text, div.innerHTML) : text
+
+  let html = escaped
+
+  // Convert markdown links: [label](url) to <a>
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|mailto:[^)\s]+)\)/g, (m, label, url) => {
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-500 font-semibold underline">${label}</a>`
+  })
+
+  // Convert inline code `code` to <code>
+  html = html.replace(/`([^`]+)`/g, (m, code) => `<code class="font-mono bg-slate-100 px-1 rounded text-sm">${code}</code>`)
+
+  return html
+}
+
 interface ContentBlock {
   type: 'header' | 'paragraph' | 'alert' | 'table' | 'code' | 'image' | 'quote' | 'list'
   level?: number
@@ -40,14 +61,13 @@ export default function ContentRenderer({ content, className = '' }: ContentRend
                     key={index} 
                     className="text-lg text-slate-700 mb-12 space-y-3 pl-8 [&_a]:text-blue-600 [&_a]:hover:text-blue-500 [&_a]:font-semibold [&_a]:underline [&_a]:hover:no-underline"
                   >
-                    {block.items?.map((item, i) => (  // ✅ Safe: returns undefined if items is undefined
-  <li
-    key={i}
-    className="leading-relaxed group"
-  >
-    {item}
-  </li>
-))}
+                    {block.items?.map((item, i) => (
+    <li
+      key={i}
+      className="leading-relaxed group"
+      dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(item || '') }}
+    />
+  ))}
                   </ListTag>
                 )  
               case 'header':
@@ -66,12 +86,12 @@ export default function ContentRenderer({ content, className = '' }: ContentRend
             )
             
             case 'paragraph':
-                return (
-                    <p key={index} 
-                    className="text-lg md:text-xl text-slate-700 leading-[1.8] mb-8 max-w-4xl"
-                    dangerouslySetInnerHTML={{ __html: block.text || '' }}
-                    />
-                )
+        return (
+          <p key={index} 
+          className="text-lg md:text-xl text-slate-700 leading-[1.8] mb-8 max-w-4xl"
+          dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(block.text || '') }}
+          />
+        )
                 
                 case 'alert':
                     const icons = {
@@ -99,7 +119,7 @@ export default function ContentRenderer({ content, className = '' }: ContentRend
                   <Icon className="w-6 h-6 flex-shrink-0 mt-0.5" />
                   <h4 className="font-black text-xl">{block.title}</h4>
                 </div>
-                <p className="text-lg">{block.text}</p>
+                <p className="text-lg" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(block.text || '') }} />
               </motion.div>
             )
             
@@ -122,7 +142,7 @@ export default function ContentRenderer({ content, className = '' }: ContentRend
                           <tr key={i} className="hover:bg-slate-50 transition-colors">
                           {row.map((cell, j) => (
                               <td key={j} className="px-8 py-6 text-lg text-slate-700">
-                              {cell}
+                              <span dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(cell) }} />
                             </td>
                           ))}
                         </tr>

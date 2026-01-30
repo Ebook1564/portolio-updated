@@ -24,6 +24,27 @@ SyntaxHighlighter.registerLanguage('typescript', ts);
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('glsl', glsl);
 
+// Small helper to convert inline markdown links and inline code to HTML
+function convertMarkdownToHtml(text: string | undefined) {
+    if (!text) return ''
+    // Basic escape
+    if (typeof document === 'undefined') {
+        // On server, return text as-is (no DOM)
+        return text
+    }
+    const div = document.createElement('div')
+    div.textContent = text
+    let html = div.innerHTML
+
+    html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|mailto:[^)\s]+)\)/g, (m, label, url) => {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-500 font-semibold underline">${label}</a>`
+    })
+
+    html = html.replace(/`([^`]+)`/g, (m, code) => `<code class="font-mono bg-slate-100 px-1 rounded text-sm">${code}</code>`)
+
+    return html
+}
+
 const ContentBlockRenderer = ({ block }: { block: GuideContentBlock & { id?: string } }) => {
     switch (block.type) {
         case 'header':
@@ -34,12 +55,12 @@ const ContentBlockRenderer = ({ block }: { block: GuideContentBlock & { id?: str
                 </Tag>
             );
         case 'paragraph':
-            return <p className="text-lg md:text-xl text-slate-600 leading-[1.8] mb-8">{block.text}</p>;
+            return <p className="text-lg md:text-xl text-slate-600 leading-[1.8] mb-8" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(block.text) }} />;
         case 'list':
             const ListTag = block.style === 'ordered' ? 'ol' : 'ul';
             return (
                 <ListTag className={`list-${block.style === 'ordered' ? 'decimal' : 'disc'} pl-6 mb-8 space-y-4 text-lg text-slate-600`}>
-                    {block.items.map((item, i) => <li key={i} className="pl-2">{item}</li>)}
+                    {block.items.map((item, i) => <li key={i} className="pl-2" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(item) }} />)}
                 </ListTag>
             );
         case 'code':
@@ -83,7 +104,7 @@ const ContentBlockRenderer = ({ block }: { block: GuideContentBlock & { id?: str
                     <v.icon className={`w-8 h-8 ${v.iconColor} shrink-0`} />
                     <div>
                         <h4 className={`font-black uppercase tracking-widest text-xs mb-2 ${v.text}`}>{block.title}</h4>
-                        <p className={`text-lg font-medium ${v.text} opacity-90`}>{block.text}</p>
+                        <p className={`text-lg font-medium ${v.text} opacity-90`} dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(block.text) }} />
                     </div>
                 </div>
             );
@@ -124,10 +145,10 @@ const ContentBlockRenderer = ({ block }: { block: GuideContentBlock & { id?: str
                         </thead>
                         <tbody className="divide-y divide-slate-50">
                             {block.rows.map((row, i) => (
-                                <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                                    {row.map((cell, j) => <td key={j} className="p-6 text-slate-600 font-medium">{cell}</td>)}
-                                </tr>
-                            ))}
+                                    <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                                        {row.map((cell, j) => <td key={j} className="p-6 text-slate-600 font-medium" dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(cell) }} />)}
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>
