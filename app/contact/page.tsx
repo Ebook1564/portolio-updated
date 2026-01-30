@@ -63,7 +63,7 @@ export default function ContactPage() {
 
                                 <p className="text-xl text-slate-400 leading-relaxed mb-12">
                                     Have a question about our game engine solutions? Want to partner up?
-                                    Or just want to chat about a shiny new plugin in Game Dev? We are all ears.
+                                    Or just want to chat about a shiny new plugin in Unity? We are all ears.
                                 </p>
 
                                 <div className="space-y-8">
